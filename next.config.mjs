@@ -8,6 +8,13 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    domains: [
+      "cdn-icons-png.flaticon.com",
+      "upload.wikimedia.org",
+      "raw.githubusercontent.com",
+      "playwright.dev",
+      "github.com"
+    ],
   },
 }
 

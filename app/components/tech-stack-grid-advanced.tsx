@@ -123,6 +123,11 @@ export default function TechStackGridAdvanced() {
           icon: "https://cdn.simpleicons.org/selenium",
           description: "Test automation framework",
         },
+        {
+          name: "PM2",
+          icon: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png",
+          description: "Node.js process manager",
+        },
   ],
 },
   ]

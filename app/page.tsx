@@ -324,23 +324,24 @@ export default function Home() {
             <ProjectCard
               title="WorldOfGame"
               description="A Python-based mini-games platform showcasing an advanced DevOps and CI/CD workflow with automated deployments and comprehensive testing."
-              techStack={["Python", "CI/CD", "Docker"]}
+              techStack={["Python", "CI/CD", "Docker","Selenium"]}
               githubUrl="https://github.com/Matan-Shabi/WorldOfGame"
-              image="/worldofgame-project.png"
+              image="https://cdn-icons-png.flaticon.com/512/354/354637.png"
             />
             <ProjectCard
               title="Essentia User Management System"
-              description="Built a modular admin panel with dynamic role-based permissions. Developed scalable frontend components using Feature-Sliced Design (Next.js) and a robust Next.js backend."
-              techStack={["Next.js", "Docker", "Jenkins"]}
+              description="Built a modular admin panel with dynamic role-based permissions. Developed scalable frontend components using Feature-Sliced Design (Next.js) and a robust Express.js backend."
+              techStack={["Next.js","PM2","Express.js","IIS"]}
               githubUrl="https://github.com/Matan-Shabi"
-              image="/essentia-project.png"
+              image="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+
             />
             <ProjectCard
               title="Mulligan Parking System"
               description="A distributed parking management system using RabbitMQ, MongoDB, and AI-powered recommendations. Fully distributed and fault-tolerant parking system."
-              techStack={["Spring Boot", "Express.js", "MongoDB", "RabbitMQ"]}
+              techStack={["Java","MongoDB", "RabbitMQ"]}
               githubUrl="https://github.com/Matan-Shabi"
-              image="/mulligan-project.png"
+              image="https://cdn-icons-png.flaticon.com/512/263/263115.png"
             />
           </div>
         </div>

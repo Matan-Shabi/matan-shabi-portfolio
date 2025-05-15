@@ -48,7 +48,11 @@ export default function ProjectCard({ title, description, techStack, githubUrl, 
       {image && (
         <div className="relative h-48 overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-t from-[#1A2433] to-transparent z-10"></div>
-          <Image src={image || "/placeholder.svg"} alt={title} fill className="object-cover" />
+          <Image  src={image || "/placeholder.svg"}
+                  alt={title}
+                  fill
+                  unoptimized // <-- add this
+                  className="object-cover" />
         </div>
       )}
       <div className="p-6 flex-grow">
