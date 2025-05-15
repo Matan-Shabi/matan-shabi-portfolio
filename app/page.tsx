@@ -81,7 +81,7 @@ export default function Home() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <a
-                  href="/matan-shabi-resume.pdf"
+                  href="/Matan-Shabi-CV%20.pdf"
                   className="flex items-center gap-2 bg-gradient-to-r from-[#232F3E] to-[#2d3b4d] hover:from-[#2d3b4d] hover:to-[#3a4a5e] text-white px-6 py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg"
                   download
                 >
