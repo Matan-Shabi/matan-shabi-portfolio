@@ -2,6 +2,8 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Fira_Code } from "next/font/google"
 import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
 import "./globals.css"
 
 const inter = Inter({
@@ -33,6 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${firaCode.variable} font-sans`}>{children}</body>
+      <SpeedInsights />
       <Analytics />
     </html>
   )
