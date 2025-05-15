@@ -174,23 +174,27 @@ export default function Home() {
                     <div className="bg-[#FF9900]/20 p-2 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
                       <Mail size={18} className="text-[#FF9900]" />
                     </div>
-                    <span>matan.shabi20@gmail.com</span>
+                    <a href="mailto:matan.shabi20@gmail.com" className="hover:underline">
+                      matan.shabi20@gmail.com
+                    </a>
                   </li>
                   <li className="flex items-center gap-3 group">
                     <div className="bg-[#FF9900]/20 p-2 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
                       <Phone size={18} className="text-[#FF9900]" />
                     </div>
-                    <span>+972-52-8885896</span>
+                    <a href="tel:+972528885896" className="hover:underline">
+                      +972-52-8885896
+                    </a>
                   </li>
                   <li className="flex items-center gap-3 group">
                     <div className="bg-[#FF9900]/20 p-2 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
                       <Linkedin size={18} className="text-[#FF9900]" />
                     </div>
                     <a
-                      href="https://linkedin.com/in/matan-shabi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#FF9900] transition-colors"
+                        href="https://linkedin.com/in/matan-shabi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#FF9900] transition-colors"
                     >
                       linkedin.com/in/matan-shabi
                     </a>
@@ -200,10 +204,10 @@ export default function Home() {
                       <Github size={18} className="text-[#FF9900]" />
                     </div>
                     <a
-                      href="https://github.com/Matan-Shabi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-[#FF9900] transition-colors"
+                        href="https://github.com/Matan-Shabi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-[#FF9900] transition-colors"
                     >
                       github.com/Matan-Shabi
                     </a>
@@ -394,7 +398,7 @@ export default function Home() {
             <h2 className="text-3xl font-bold mb-2 inline-block text-gradient">Get In Touch</h2>
             <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className=" grid grid-cols-1 md:grid-cols-2 gap-12 ">
             <div className="bg-gradient-to-br from-[#232F3E]/80 to-[#1A2433]/80 p-8 rounded-xl border border-[#FF9900]/20 shadow-xl backdrop-blur-sm animate-fade-in">
               <h3 className="text-xl font-semibold mb-6 text-[#FF9900]">Contact Information</h3>
               <div className="space-y-6">
@@ -454,9 +458,6 @@ export default function Home() {
               <div className="mt-8 flex justify-center">
                 <QRCode />
               </div>
-            </div>
-            <div className="bg-gradient-to-br from-[#232F3E]/80 to-[#1A2433]/80 p-8 rounded-xl border border-[#FF9900]/20 shadow-xl backdrop-blur-sm animate-fade-in-delayed">
-              <ContactForm />
             </div>
           </div>
         </div>
