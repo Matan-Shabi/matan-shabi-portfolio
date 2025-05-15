@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata } from "next"
 import { Inter, Fira_Code } from "next/font/google"
+import { Analytics } from '@vercel/analytics/next';
 import "./globals.css"
 
 const inter = Inter({
@@ -27,10 +28,12 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) {
+}>)
+{
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${firaCode.variable} font-sans`}>{children}</body>
+      <Analytics />
     </html>
   )
 }

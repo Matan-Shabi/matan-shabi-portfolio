@@ -13,6 +13,8 @@ import AnimatedBackground from "./components/animated-background"
 import CICDPipelineAnimation from "./components/cicd-pipeline-animation"
 import PipelineBackground from "./components/pipeline-background"
 
+
+
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
