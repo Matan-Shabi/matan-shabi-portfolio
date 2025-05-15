@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import { Code, Package, TestTube, Rocket, BarChart, Shield, GitBranch, Check, X, AlertTriangle } from "lucide-react"
+import { Code, Package, TestTube, Rocket, BarChart, Shield, GitBranch, Check, X, AlertTriangle } from 'lucide-react'
 
 interface PipelineStage {
   id: string
@@ -23,10 +23,18 @@ export default function CICDPipelineAnimation() {
   const [showCodeSnippet, setShowCodeSnippet] = useState(false)
   const [deploymentProgress, setDeploymentProgress] = useState(0)
   const [showSecurityAlert, setShowSecurityAlert] = useState(false)
+  const [pipelineNumber, setPipelineNumber] = useState<number | null>(null)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   const logContainerRef = useRef<HTMLDivElement>(null)
   const pipelineRef = useRef<HTMLDivElement>(null)
   const animationRef = useRef<number>(0)
+
+  // Generate random pipeline number after hydration
+  useEffect(() => {
+    setPipelineNumber(Math.floor(Math.random() * 1000))
+    setIsHydrated(true)
+  }, [])
 
   // Initial pipeline stages
   const [stages, setStages] = useState<PipelineStage[]>([
@@ -353,11 +361,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         // Show security alert during security stage
         if (stage.id === "security") {
           setTimeout(
-            () => {
-              setShowSecurityAlert(true)
-              setTimeout(() => setShowSecurityAlert(false), 5000)
-            },
-            (stage.duration! * 1000) / 3,
+              () => {
+                setShowSecurityAlert(true)
+                setTimeout(() => setShowSecurityAlert(false), 5000)
+              },
+              (stage.duration! * 1000) / 3,
           )
         }
 
@@ -389,26 +397,26 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         setCurrentLogIndex(0)
 
         logTimer = setInterval(
-          () => {
-            if (logIndex < stage.logs.length) {
-              setCurrentLogIndex(logIndex)
-              logIndex++
-            } else {
-              clearInterval(logTimer)
+            () => {
+              if (logIndex < stage.logs.length) {
+                setCurrentLogIndex(logIndex)
+                logIndex++
+              } else {
+                clearInterval(logTimer)
 
-              // Mark stage as complete after all logs are shown
-              setTimeout(() => {
-                setStages((prevStages) =>
-                  prevStages.map((s, idx) => (idx === stageIndex ? { ...s, status: "success" } : s)),
-                )
+                // Mark stage as complete after all logs are shown
+                setTimeout(() => {
+                  setStages((prevStages) =>
+                      prevStages.map((s, idx) => (idx === stageIndex ? { ...s, status: "success" } : s)),
+                  )
 
-                // Move to next stage
-                currentStageIndex++
-                runStage(currentStageIndex)
-              }, 1000)
-            }
-          },
-          (stage.duration! * 1000) / stage.logs.length,
+                  // Move to next stage
+                  currentStageIndex++
+                  runStage(currentStageIndex)
+                }, 1000)
+              }
+            },
+            (stage.duration! * 1000) / stage.logs.length,
         )
       }
 
@@ -535,188 +543,191 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
   }
 
   return (
-    <div className="bg-[#0F1924] rounded-xl border border-[#FF9900]/20 shadow-xl overflow-hidden">
-      <div className="bg-[#232F3E] p-4 border-b border-[#FF9900]/20 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <GitBranch size={20} className="text-[#FF9900]" />
-          <span className="font-mono text-sm">feature/new-auth-system</span>
-        </div>
-        <div className="flex items-center gap-2">
-          <span className="text-sm text-gray-400">Pipeline #{Math.floor(Math.random() * 1000)}</span>
-          {pipelineRunning ? (
-            <span className="flex items-center gap-1 text-xs bg-[#FF9900]/20 text-[#FF9900] px-2 py-1 rounded-full">
+      <div className="bg-[#0F1924] rounded-xl border border-[#FF9900]/20 shadow-xl overflow-hidden">
+        <div className="bg-[#232F3E] p-4 border-b border-[#FF9900]/20 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <GitBranch size={20} className="text-[#FF9900]" />
+            <span className="font-mono text-sm">feature/new-auth-system</span>
+          </div>
+          <div className="flex items-center gap-2">
+            {/* Only show pipeline number after hydration */}
+            <span className="text-sm text-gray-400">
+            {isHydrated ? `Pipeline #${pipelineNumber}` : "Pipeline"}
+          </span>
+            {pipelineRunning ? (
+                <span className="flex items-center gap-1 text-xs bg-[#FF9900]/20 text-[#FF9900] px-2 py-1 rounded-full">
               <div className="h-2 w-2 rounded-full bg-[#FF9900] animate-pulse"></div>
               Running
             </span>
-          ) : pipelineComplete ? (
-            <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
+            ) : pipelineComplete ? (
+                <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
               <Check size={12} />
               Complete
             </span>
-          ) : (
-            <span className="flex items-center gap-1 text-xs bg-gray-500/20 text-gray-400 px-2 py-1 rounded-full">
+            ) : (
+                <span className="flex items-center gap-1 text-xs bg-gray-500/20 text-gray-400 px-2 py-1 rounded-full">
               Initializing
             </span>
-          )}
-        </div>
-      </div>
-
-      <div className="p-6">
-        {/* Pipeline Stages */}
-        <div className="relative mb-8" ref={pipelineRef}>
-          <div className="flex justify-between items-center">
-            {stages.map((stage) => (
-              <div
-                key={stage.id}
-                data-stage-id={stage.id}
-                className={`pipeline-stage relative flex flex-col items-center ${
-                  activeStage === stage.id ? "scale-110" : ""
-                } transition-all duration-300`}
-              >
-                <div
-                  className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                    stage.status === "pending"
-                      ? "bg-[#232F3E] text-gray-400"
-                      : stage.status === "running"
-                        ? "bg-[#FF9900] text-black"
-                        : stage.status === "success"
-                          ? "bg-green-500 text-white"
-                          : stage.status === "failed"
-                            ? "bg-red-500 text-white"
-                            : "bg-yellow-500 text-black"
-                  } transition-colors duration-300`}
-                >
-                  {stage.icon}
-                </div>
-                <span className="mt-2 text-xs font-medium">{stage.name}</span>
-                <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                  {getStatusIcon(stage.status)}
-                </div>
-              </div>
-            ))}
+            )}
           </div>
         </div>
 
-        {/* Terminal Output */}
-        <div className="relative">
-          {/* Code Snippet Overlay */}
-          {showCodeSnippet && (
-            <div className="absolute inset-0 z-10 bg-[#0F1924]/90 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-              <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl w-full max-w-2xl overflow-hidden">
-                <div className="bg-[#1A2433] p-2 border-b border-[#FF9900]/20 flex items-center">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+        <div className="p-6">
+          {/* Pipeline Stages */}
+          <div className="relative mb-8" ref={pipelineRef}>
+            <div className="flex justify-between items-center">
+              {stages.map((stage) => (
+                  <div
+                      key={stage.id}
+                      data-stage-id={stage.id}
+                      className={`pipeline-stage relative flex flex-col items-center ${
+                          activeStage === stage.id ? "scale-110" : ""
+                      } transition-all duration-300`}
+                  >
+                    <div
+                        className={`w-14 h-14 rounded-full flex items-center justify-center ${
+                            stage.status === "pending"
+                                ? "bg-[#232F3E] text-gray-400"
+                                : stage.status === "running"
+                                    ? "bg-[#FF9900] text-black"
+                                    : stage.status === "success"
+                                        ? "bg-green-500 text-white"
+                                        : stage.status === "failed"
+                                            ? "bg-red-500 text-white"
+                                            : "bg-yellow-500 text-black"
+                        } transition-colors duration-300`}
+                    >
+                      {stage.icon}
+                    </div>
+                    <span className="mt-2 text-xs font-medium">{stage.name}</span>
+                    <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
+                      {getStatusIcon(stage.status)}
+                    </div>
                   </div>
-                  <div className="ml-4 text-xs font-mono">auth-middleware.ts</div>
-                </div>
-                <pre className="p-4 text-sm font-mono text-gray-300 overflow-auto max-h-80">
+              ))}
+            </div>
+          </div>
+
+          {/* Terminal Output */}
+          <div className="relative">
+            {/* Code Snippet Overlay */}
+            {showCodeSnippet && (
+                <div className="absolute inset-0 z-10 bg-[#0F1924]/90 backdrop-blur-sm flex items-center justify-center animate-fade-in">
+                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl w-full max-w-2xl overflow-hidden">
+                    <div className="bg-[#1A2433] p-2 border-b border-[#FF9900]/20 flex items-center">
+                      <div className="flex gap-1.5">
+                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      </div>
+                      <div className="ml-4 text-xs font-mono">auth-middleware.ts</div>
+                    </div>
+                    <pre className="p-4 text-sm font-mono text-gray-300 overflow-auto max-h-80">
                   <code>{codeSnippet}</code>
                 </pre>
-              </div>
-            </div>
-          )}
-
-          {/* Security Alert Overlay */}
-          {showSecurityAlert && (
-            <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-              <div className="bg-red-900/50 rounded-lg border border-red-500 shadow-xl p-6 max-w-md">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-red-500 rounded-full p-2">
-                    <Shield size={24} className="text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-white">Security Vulnerability Detected</h3>
                 </div>
-                <p className="text-gray-200 mb-4">
-                  High severity vulnerability found in axios@0.21.1: Server-Side Request Forgery (SSRF)
-                </p>
-                <div className="bg-[#232F3E] p-3 rounded border border-[#FF9900]/20 font-mono text-sm mb-4">
-                  <p>Remediation: Upgrade to axios@0.21.2</p>
-                </div>
-                <div className="flex justify-end">
-                  <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors">
-                    Fixing Automatically...
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
+            )}
 
-          {/* Deployment Progress Overlay */}
-          {deploymentProgress > 0 && deploymentProgress < 100 && (
-            <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-              <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl p-6 max-w-md w-full">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="bg-[#FF9900] rounded-full p-2">
-                    <Rocket size={24} className="text-black" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white">Deploying to Production</h3>
-                </div>
-                <div className="mb-2 flex justify-between text-sm">
-                  <span>Progress</span>
-                  <span>{Math.round(deploymentProgress)}%</span>
-                </div>
-                <div className="w-full bg-[#0F1924] rounded-full h-2 mb-4">
-                  <div
-                    className="bg-gradient-to-r from-[#FF9900] to-[#FF5757] h-2 rounded-full transition-all duration-300"
-                    style={{ width: `${deploymentProgress}%` }}
-                  ></div>
-                </div>
-                <div className="text-sm text-gray-400">
-                  {deploymentProgress < 30 && "Preparing Kubernetes manifests..."}
-                  {deploymentProgress >= 30 && deploymentProgress < 60 && "Applying configuration changes..."}
-                  {deploymentProgress >= 60 && deploymentProgress < 90 && "Rolling out new pods..."}
-                  {deploymentProgress >= 90 && "Running final health checks..."}
-                </div>
-              </div>
-            </div>
-          )}
-
-          <div className="bg-[#1A2433] rounded-lg border border-[#FF9900]/20 overflow-hidden">
-            <div className="bg-[#232F3E] p-2 border-b border-[#FF9900]/20 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                <span className="text-xs font-mono">{activeStage ? `${activeStage}.log` : "pipeline.log"}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <label className="flex items-center gap-1 text-xs text-gray-400">
-                  <input
-                    type="checkbox"
-                    checked={autoScroll}
-                    onChange={() => setAutoScroll(!autoScroll)}
-                    className="h-3 w-3"
-                  />
-                  Auto-scroll
-                </label>
-              </div>
-            </div>
-            <div ref={logContainerRef} className="p-4 font-mono text-sm text-gray-300 h-64 overflow-auto">
-              {activeStage && (
-                <div>
-                  {stages
-                    .find((s) => s.id === activeStage)
-                    ?.logs.slice(0, currentLogIndex + 1)
-                    .map((log, idx) => (
-                      <div key={idx} className="leading-tight mb-1">
-                        {log.startsWith("$") ? (
-                          <span className="text-[#FF9900]">{log}</span>
-                        ) : log.includes("error") || log.includes("fail") || log.includes("vulnerability") ? (
-                          <span className="text-red-400">{log}</span>
-                        ) : log.includes("success") || log.includes("passed") || log.includes("✓") ? (
-                          <span className="text-green-400">{log}</span>
-                        ) : (
-                          <span>{log}</span>
-                        )}
+            {/* Security Alert Overlay */}
+            {showSecurityAlert && (
+                <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
+                  <div className="bg-red-900/50 rounded-lg border border-red-500 shadow-xl p-6 max-w-md">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="bg-red-500 rounded-full p-2">
+                        <Shield size={24} className="text-white" />
                       </div>
-                    ))}
-                  {pipelineRunning && activeStage && <div className="inline-block animate-pulse">▋</div>}
+                      <h3 className="text-xl font-bold text-white">Security Vulnerability Detected</h3>
+                    </div>
+                    <p className="text-gray-200 mb-4">
+                      High severity vulnerability found in axios@0.21.1: Server-Side Request Forgery (SSRF)
+                    </p>
+                    <div className="bg-[#232F3E] p-3 rounded border border-[#FF9900]/20 font-mono text-sm mb-4">
+                      <p>Remediation: Upgrade to axios@0.21.2</p>
+                    </div>
+                    <div className="flex justify-end">
+                      <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors">
+                        Fixing Automatically...
+                      </button>
+                    </div>
+                  </div>
                 </div>
-              )}
+            )}
+
+            {/* Deployment Progress Overlay */}
+            {deploymentProgress > 0 && deploymentProgress < 100 && (
+                <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
+                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl p-6 max-w-md w-full">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="bg-[#FF9900] rounded-full p-2">
+                        <Rocket size={24} className="text-black" />
+                      </div>
+                      <h3 className="text-xl font-bold text-white">Deploying to Production</h3>
+                    </div>
+                    <div className="mb-2 flex justify-between text-sm">
+                      <span>Progress</span>
+                      <span>{Math.round(deploymentProgress)}%</span>
+                    </div>
+                    <div className="w-full bg-[#0F1924] rounded-full h-2 mb-4">
+                      <div
+                          className="bg-gradient-to-r from-[#FF9900] to-[#FF5757] h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${deploymentProgress}%` }}
+                      ></div>
+                    </div>
+                    <div className="text-sm text-gray-400">
+                      {deploymentProgress < 30 && "Preparing Kubernetes manifests..."}
+                      {deploymentProgress >= 30 && deploymentProgress < 60 && "Applying configuration changes..."}
+                      {deploymentProgress >= 60 && deploymentProgress < 90 && "Rolling out new pods..."}
+                      {deploymentProgress >= 90 && "Running final health checks..."}
+                    </div>
+                  </div>
+                </div>
+            )}
+
+            <div className="bg-[#1A2433] rounded-lg border border-[#FF9900]/20 overflow-hidden">
+              <div className="bg-[#232F3E] p-2 border-b border-[#FF9900]/20 flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                  <span className="text-xs font-mono">{activeStage ? `${activeStage}.log` : "pipeline.log"}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <label className="flex items-center gap-1 text-xs text-gray-400">
+                    <input
+                        type="checkbox"
+                        checked={autoScroll}
+                        onChange={() => setAutoScroll(!autoScroll)}
+                        className="h-3 w-3"
+                    />
+                    Auto-scroll
+                  </label>
+                </div>
+              </div>
+              <div ref={logContainerRef} className="p-4 font-mono text-sm text-gray-300 h-64 overflow-auto">
+                {activeStage && (
+                    <div>
+                      {stages
+                          .find((s) => s.id === activeStage)
+                          ?.logs.slice(0, currentLogIndex + 1)
+                          .map((log, idx) => (
+                              <div key={idx} className="leading-tight mb-1">
+                                {log.startsWith("$") ? (
+                                    <span className="text-[#FF9900]">{log}</span>
+                                ) : log.includes("error") || log.includes("fail") || log.includes("vulnerability") ? (
+                                    <span className="text-red-400">{log}</span>
+                                ) : log.includes("success") || log.includes("passed") || log.includes("✓") ? (
+                                    <span className="text-green-400">{log}</span>
+                                ) : (
+                                    <span>{log}</span>
+                                )}
+                              </div>
+                          ))}
+                      {pipelineRunning && activeStage && <div className="inline-block animate-pulse">▋</div>}
+                    </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
   )
 }
