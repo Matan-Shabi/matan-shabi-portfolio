@@ -7,7 +7,6 @@ import { useState } from "react"
 import QRCode from "./components/qr-code"
 import TechStackGridAdvanced from "./components/tech-stack-grid-advanced"
 import ProjectCard from "./components/project-card"
-import ContactForm from "./components/contact-form"
 import ExperienceTimelineHorizontal from "./components/experience-timeline-horizontal"
 import EducationTimeline from "./components/education-timeline"
 import AnimatedBackground from "./components/animated-background"
@@ -126,7 +125,7 @@ export default function Home() {
 
               <div className="w-full md:w-3/5 animate-fade-in text-center md:text-left">
                 <div className="inline-block bg-gradient-to-r from-[#FF9900] to-[#FF5757] text-black font-medium px-4 py-1 rounded-full mb-4 animate-bounce-subtle">
-                  Available for DevOps Positions
+                  Available for DevOps, DevSecOps Positions
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-3 text-gradient">Matan Shabi</h1>
                 <h2 className="text-lg md:text-xl lg:text-2xl text-[#FF9900] font-mono mb-3 animate-pulse-slow">
