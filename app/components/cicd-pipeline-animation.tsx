@@ -544,6 +544,7 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
 
   return (
     <div className="bg-[#0F1924] rounded-xl border border-[#FF9900]/20 shadow-xl overflow-hidden">
+      {/* Header */}
       <div className="bg-[#232F3E] p-3 border-b border-[#FF9900]/20 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <GitBranch size={16} className="text-[#FF9900]" />
@@ -572,9 +573,10 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         </div>
       </div>
 
-      <div className="p-3 sm:p-4 md:p-6">
-        {/* Pipeline Stages */}
-        <div className="relative mb-6" ref={pipelineRef}>
+      {/* Body - removed the p-3 sm:p-4 md:p-6 padding from this container */}
+      <div>
+        {/* Pipeline Stages - added padding only to this section */}
+        <div className="relative p-3 sm:p-4 md:p-6 pb-0 sm:pb-0 md:pb-0" ref={pipelineRef}>
           <div className="flex justify-between items-center">
             {stages.map((stage) => (
               <div
@@ -608,8 +610,8 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
           </div>
         </div>
 
-        {/* Terminal Output */}
-        <div className="relative">
+        {/* Terminal Output - added padding only to this section */}
+        <div className="relative p-3 sm:p-4 md:p-6 pt-6 sm:pt-6 md:pt-6">
           {/* Code Snippet Overlay */}
           {showCodeSnippet && (
             <div className="absolute inset-0 z-10 bg-[#0F1924]/90 backdrop-blur-sm flex items-center justify-center animate-fade-in">
