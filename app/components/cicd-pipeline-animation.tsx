@@ -3,7 +3,19 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
-import { Code, Package, TestTube, Rocket, BarChart, Shield, GitBranch, Check, X, AlertTriangle } from 'lucide-react'
+import {
+  Code,
+  Package,
+  TestTube,
+  Rocket,
+  BarChart,
+  Shield,
+  GitBranch,
+  Check,
+  X,
+  AlertTriangle,
+  ChevronRight,
+} from "lucide-react"
 
 interface PipelineStage {
   id: string
@@ -25,6 +37,7 @@ export default function CICDPipelineAnimation() {
   const [showSecurityAlert, setShowSecurityAlert] = useState(false)
   const [pipelineNumber, setPipelineNumber] = useState<number | null>(null)
   const [isHydrated, setIsHydrated] = useState(false)
+  const [expandedView, setExpandedView] = useState(false)
 
   const logContainerRef = useRef<HTMLDivElement>(null)
   const pipelineRef = useRef<HTMLDivElement>(null)
@@ -41,7 +54,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "code",
       name: "Code",
-      icon: <Code size={24} />,
+      icon: <Code size={18} />,
       status: "pending",
       logs: [
         "$ git checkout -b feature/new-auth-system",
@@ -74,7 +87,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "build",
       name: "Build",
-      icon: <Package size={24} />,
+      icon: <Package size={18} />,
       status: "pending",
       logs: [
         "$ docker build -t myapp:latest .",
@@ -133,7 +146,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "test",
       name: "Test",
-      icon: <TestTube size={24} />,
+      icon: <TestTube size={18} />,
       status: "pending",
       logs: [
         "Running unit tests...",
@@ -189,7 +202,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "security",
       name: "Security",
-      icon: <Shield size={24} />,
+      icon: <Shield size={18} />,
       status: "pending",
       logs: [
         "Running security scan...",
@@ -231,7 +244,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "deploy",
       name: "Deploy",
-      icon: <Rocket size={24} />,
+      icon: <Rocket size={18} />,
       status: "pending",
       logs: [
         "Preparing deployment to production...",
@@ -274,7 +287,7 @@ export default function CICDPipelineAnimation() {
     {
       id: "monitor",
       name: "Monitor",
-      icon: <BarChart size={24} />,
+      icon: <BarChart size={18} />,
       status: "pending",
       logs: [
         "Setting up monitoring alerts...",
@@ -443,8 +456,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     }
   }, [currentLogIndex, autoScroll])
 
-  // Draw pipeline flow animation
+  // Draw pipeline flow animation for desktop view
   useEffect(() => {
+    // Only run canvas animation in expanded (desktop) view
+    if (!expandedView) return
+
     const canvas = document.createElement("canvas")
     const container = pipelineRef.current
     if (!container) return
@@ -457,6 +473,11 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     const resizeCanvas = () => {
       canvas.width = container.clientWidth
       canvas.height = container.clientHeight
+      canvas.style.position = "absolute"
+      canvas.style.top = "0"
+      canvas.style.left = "0"
+      canvas.style.pointerEvents = "none"
+      canvas.style.zIndex = "1"
     }
 
     resizeCanvas()
@@ -524,17 +545,17 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
         container.removeChild(canvas)
       }
     }
-  }, [pipelineRunning, stages])
+  }, [pipelineRunning, stages, expandedView])
 
   // Get status icon based on stage status
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "success":
-        return <Check className="text-green-500" />
+        return <Check className="text-green-500" size={16} />
       case "failed":
-        return <X className="text-red-500" />
+        return <X className="text-red-500" size={16} />
       case "warning":
-        return <AlertTriangle className="text-yellow-500" />
+        return <AlertTriangle className="text-yellow-500" size={16} />
       case "running":
         return <div className="h-4 w-4 rounded-full border-2 border-[#FF9900] border-t-transparent animate-spin"></div>
       default:
@@ -542,87 +563,176 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
     }
   }
 
+  // Calculate overall pipeline progress
+  const calculateProgress = () => {
+    const completedStages = stages.filter((stage) => stage.status === "success").length
+    const totalStages = stages.length
+    return Math.round((completedStages / totalStages) * 100)
+  }
+
+  // Handle stage click
+  const handleStageClick = (stageId: string) => {
+    setActiveStage(stageId)
+  }
+
   return (
       <div className="bg-[#0F1924] rounded-xl border border-[#FF9900]/20 shadow-xl overflow-hidden">
-        <div className="bg-[#232F3E] p-4 border-b border-[#FF9900]/20 flex items-center justify-between">
+        {/* Header */}
+        <div className="bg-[#232F3E] p-3 border-b border-[#FF9900]/20 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <GitBranch size={20} className="text-[#FF9900]" />
-            <span className="font-mono text-sm">feature/new-auth-system</span>
+            <GitBranch size={16} className="text-[#FF9900]" />
+            <span className="font-mono text-xs">feature/new-auth-system</span>
           </div>
           <div className="flex items-center gap-2">
-            {/* Only show pipeline number after hydration */}
-            <span className="text-sm text-gray-400">
-            {isHydrated ? `Pipeline #${pipelineNumber}` : "Pipeline"}
-          </span>
+            <span className="text-xs text-gray-400">{isHydrated ? `Pipeline #${pipelineNumber}` : "Pipeline"}</span>
             {pipelineRunning ? (
-                <span className="flex items-center gap-1 text-xs bg-[#FF9900]/20 text-[#FF9900] px-2 py-1 rounded-full">
-              <div className="h-2 w-2 rounded-full bg-[#FF9900] animate-pulse"></div>
+                <span className="flex items-center gap-1 text-xs bg-[#FF9900]/20 text-[#FF9900] px-2 py-0.5 rounded-full">
+              <div className="h-1.5 w-1.5 rounded-full bg-[#FF9900] animate-pulse"></div>
               Running
             </span>
             ) : pipelineComplete ? (
-                <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded-full">
-              <Check size={12} />
+                <span className="flex items-center gap-1 text-xs bg-green-500/20 text-green-500 px-2 py-0.5 rounded-full">
+              <Check size={10} />
               Complete
             </span>
             ) : (
-                <span className="flex items-center gap-1 text-xs bg-gray-500/20 text-gray-400 px-2 py-1 rounded-full">
-              Initializing
+                <span className="flex items-center gap-1 text-xs bg-gray-500/20 text-gray-400 px-2 py-0.5 rounded-full">
+              Init
             </span>
             )}
           </div>
         </div>
 
-        <div className="p-6">
-          {/* Pipeline Stages */}
-          <div className="relative mb-8" ref={pipelineRef}>
-            <div className="flex justify-between items-center">
-              {stages.map((stage) => (
-                  <div
-                      key={stage.id}
-                      data-stage-id={stage.id}
-                      className={`pipeline-stage relative flex flex-col items-center ${
-                          activeStage === stage.id ? "scale-110" : ""
-                      } transition-all duration-300`}
-                  >
-                    <div
-                        className={`w-14 h-14 rounded-full flex items-center justify-center ${
-                            stage.status === "pending"
-                                ? "bg-[#232F3E] text-gray-400"
-                                : stage.status === "running"
-                                    ? "bg-[#FF9900] text-black"
-                                    : stage.status === "success"
-                                        ? "bg-green-500 text-white"
-                                        : stage.status === "failed"
-                                            ? "bg-red-500 text-white"
-                                            : "bg-yellow-500 text-black"
-                        } transition-colors duration-300`}
-                    >
-                      {stage.icon}
-                    </div>
-                    <span className="mt-2 text-xs font-medium">{stage.name}</span>
-                    <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2">
-                      {getStatusIcon(stage.status)}
-                    </div>
-                  </div>
-              ))}
+        {/* Progress Bar */}
+        {pipelineRunning && (
+            <div className="w-full bg-[#1A2433] h-1">
+              <div
+                  className="h-1 bg-gradient-to-r from-[#FF9900] to-[#FF5757] transition-all duration-300"
+                  style={{ width: `${calculateProgress()}%` }}
+              ></div>
             </div>
-          </div>
+        )}
+
+        {/* View Toggle */}
+        <div className="bg-[#1A2433] p-2 border-b border-[#FF9900]/20 flex justify-end">
+          <button
+              onClick={() => setExpandedView(!expandedView)}
+              className="text-xs flex items-center gap-1 text-gray-400 hover:text-[#FF9900] transition-colors"
+          >
+            {expandedView ? "Compact View" : "Expanded View"}
+          </button>
+        </div>
+
+        {/* Body */}
+        <div>
+          {/* Mobile-First Pipeline Stages (Vertical Layout) */}
+          {!expandedView && (
+              <div className="p-3 mb-4" ref={pipelineRef}>
+                <div className="space-y-2">
+                  {stages.map((stage) => (
+                      <button
+                          key={stage.id}
+                          data-stage-id={stage.id}
+                          onClick={() => handleStageClick(stage.id)}
+                          className={`pipeline-stage w-full flex items-center p-3 mb-2 rounded-lg ${
+                              activeStage === stage.id
+                                  ? "bg-[#232F3E] border-l-4 border-[#FF9900]"
+                                  : "bg-[#1A2433] hover:bg-[#232F3E]/70"
+                          } transition-all duration-200`}
+                      >
+                        <div
+                            className={`w-8 h-8 rounded-full flex items-center justify-center mr-3 ${
+                                stage.status === "pending"
+                                    ? "bg-[#232F3E] text-gray-400"
+                                    : stage.status === "running"
+                                        ? "bg-[#FF9900] text-black"
+                                        : stage.status === "success"
+                                            ? "bg-green-500 text-white"
+                                            : stage.status === "failed"
+                                                ? "bg-red-500 text-white"
+                                                : "bg-yellow-500 text-black"
+                            } transition-colors duration-300`}
+                        >
+                          {stage.icon}
+                        </div>
+                        <div className="flex-1 text-left">
+                          <div className="text-sm font-medium">{stage.name}</div>
+                          <div className="text-xs text-gray-400">
+                            {stage.status === "running"
+                                ? "Running..."
+                                : stage.status === "success"
+                                    ? "Completed"
+                                    : stage.status === "failed"
+                                        ? "Failed"
+                                        : stage.status === "warning"
+                                            ? "Warning"
+                                            : "Pending"}
+                          </div>
+                        </div>
+                        <div className="ml-2">{getStatusIcon(stage.status)}</div>
+                        <ChevronRight
+                            size={16}
+                            className={`ml-1 text-gray-500 transition-transform ${activeStage === stage.id ? "rotate-90" : ""}`}
+                        />
+                      </button>
+                  ))}
+                </div>
+              </div>
+          )}
+
+          {/* Desktop Pipeline Stages (Horizontal Layout) */}
+          {expandedView && (
+              <div className="relative p-4 pb-8 hidden md:block" ref={pipelineRef}>
+                <div className="flex justify-between items-center">
+                  {stages.map((stage) => (
+                      <div
+                          key={stage.id}
+                          data-stage-id={stage.id}
+                          onClick={() => handleStageClick(stage.id)}
+                          className={`pipeline-stage relative flex flex-col items-center cursor-pointer ${
+                              activeStage === stage.id ? "scale-110" : ""
+                          } transition-all duration-300`}
+                      >
+                        <div
+                            className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                                stage.status === "pending"
+                                    ? "bg-[#232F3E] text-gray-400"
+                                    : stage.status === "running"
+                                        ? "bg-[#FF9900] text-black"
+                                        : stage.status === "success"
+                                            ? "bg-green-500 text-white"
+                                            : stage.status === "failed"
+                                                ? "bg-red-500 text-white"
+                                                : "bg-yellow-500 text-black"
+                            } transition-colors duration-300`}
+                        >
+                          {stage.icon}
+                        </div>
+                        <span className="mt-1 text-xs font-medium">{stage.name}</span>
+                        <div className="absolute -bottom-6 left-1/2 transform -translate-x-1/2 flex items-center justify-center h-5 w-5">
+                          {getStatusIcon(stage.status)}
+                        </div>
+                      </div>
+                  ))}
+                </div>
+              </div>
+          )}
 
           {/* Terminal Output */}
-          <div className="relative">
+          <div className="relative p-3 pt-4">
             {/* Code Snippet Overlay */}
             {showCodeSnippet && (
                 <div className="absolute inset-0 z-10 bg-[#0F1924]/90 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl w-full max-w-2xl overflow-hidden">
+                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl w-full max-w-md overflow-hidden mx-3">
                     <div className="bg-[#1A2433] p-2 border-b border-[#FF9900]/20 flex items-center">
                       <div className="flex gap-1.5">
-                        <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                        <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                        <div className="w-2 h-2 rounded-full bg-red-500"></div>
+                        <div className="w-2 h-2 rounded-full bg-yellow-500"></div>
+                        <div className="w-2 h-2 rounded-full bg-green-500"></div>
                       </div>
-                      <div className="ml-4 text-xs font-mono">auth-middleware.ts</div>
+                      <div className="ml-3 text-[10px] font-mono">auth-middleware.ts</div>
                     </div>
-                    <pre className="p-4 text-sm font-mono text-gray-300 overflow-auto max-h-80">
+                    <pre className="p-3 text-xs font-mono text-gray-300 overflow-auto max-h-60">
                   <code>{codeSnippet}</code>
                 </pre>
                   </div>
@@ -632,21 +742,21 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
             {/* Security Alert Overlay */}
             {showSecurityAlert && (
                 <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-                  <div className="bg-red-900/50 rounded-lg border border-red-500 shadow-xl p-6 max-w-md">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-red-500 rounded-full p-2">
-                        <Shield size={24} className="text-white" />
+                  <div className="bg-red-900/50 rounded-lg border border-red-500 shadow-xl p-4 max-w-xs mx-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="bg-red-500 rounded-full p-1.5">
+                        <Shield size={16} className="text-white" />
                       </div>
-                      <h3 className="text-xl font-bold text-white">Security Vulnerability Detected</h3>
+                      <h3 className="text-base font-bold text-white">Security Vulnerability Detected</h3>
                     </div>
-                    <p className="text-gray-200 mb-4">
+                    <p className="text-xs text-gray-200 mb-3">
                       High severity vulnerability found in axios@0.21.1: Server-Side Request Forgery (SSRF)
                     </p>
-                    <div className="bg-[#232F3E] p-3 rounded border border-[#FF9900]/20 font-mono text-sm mb-4">
+                    <div className="bg-[#232F3E] p-2 rounded border border-[#FF9900]/20 font-mono text-xs mb-3">
                       <p>Remediation: Upgrade to axios@0.21.2</p>
                     </div>
                     <div className="flex justify-end">
-                      <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors">
+                      <button className="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded text-xs transition-colors">
                         Fixing Automatically...
                       </button>
                     </div>
@@ -657,24 +767,24 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
             {/* Deployment Progress Overlay */}
             {deploymentProgress > 0 && deploymentProgress < 100 && (
                 <div className="absolute inset-0 z-10 bg-[#0F1924]/80 backdrop-blur-sm flex items-center justify-center animate-fade-in">
-                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl p-6 max-w-md w-full">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-[#FF9900] rounded-full p-2">
-                        <Rocket size={24} className="text-black" />
+                  <div className="bg-[#232F3E] rounded-lg border border-[#FF9900]/20 shadow-xl p-4 max-w-xs w-full mx-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="bg-[#FF9900] rounded-full p-1.5">
+                        <Rocket size={16} className="text-black" />
                       </div>
-                      <h3 className="text-xl font-bold text-white">Deploying to Production</h3>
+                      <h3 className="text-base font-bold text-white">Deploying to Production</h3>
                     </div>
-                    <div className="mb-2 flex justify-between text-sm">
+                    <div className="mb-2 flex justify-between text-xs">
                       <span>Progress</span>
                       <span>{Math.round(deploymentProgress)}%</span>
                     </div>
-                    <div className="w-full bg-[#0F1924] rounded-full h-2 mb-4">
+                    <div className="w-full bg-[#0F1924] rounded-full h-1.5 mb-3">
                       <div
-                          className="bg-gradient-to-r from-[#FF9900] to-[#FF5757] h-2 rounded-full transition-all duration-300"
+                          className="bg-gradient-to-r from-[#FF9900] to-[#FF5757] h-1.5 rounded-full transition-all duration-300"
                           style={{ width: `${deploymentProgress}%` }}
                       ></div>
                     </div>
-                    <div className="text-sm text-gray-400">
+                    <div className="text-xs text-gray-400">
                       {deploymentProgress < 30 && "Preparing Kubernetes manifests..."}
                       {deploymentProgress >= 30 && deploymentProgress < 60 && "Applying configuration changes..."}
                       {deploymentProgress >= 60 && deploymentProgress < 90 && "Rolling out new pods..."}
@@ -687,22 +797,22 @@ export const authMiddleware = (req: Request, res: Response, next: NextFunction) 
             <div className="bg-[#1A2433] rounded-lg border border-[#FF9900]/20 overflow-hidden">
               <div className="bg-[#232F3E] p-2 border-b border-[#FF9900]/20 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full bg-green-500"></div>
-                  <span className="text-xs font-mono">{activeStage ? `${activeStage}.log` : "pipeline.log"}</span>
+                  <div className="h-2 w-2 rounded-full bg-green-500"></div>
+                  <span className="text-[10px] font-mono">{activeStage ? `${activeStage}.log` : "pipeline.log"}</span>
                 </div>
-                <div className="flex items-center gap-3">
-                  <label className="flex items-center gap-1 text-xs text-gray-400">
+                <div className="flex items-center gap-2">
+                  <label className="flex items-center gap-1 text-[10px] text-gray-400">
                     <input
                         type="checkbox"
                         checked={autoScroll}
                         onChange={() => setAutoScroll(!autoScroll)}
-                        className="h-3 w-3"
+                        className="h-2.5 w-2.5"
                     />
                     Auto-scroll
                   </label>
                 </div>
               </div>
-              <div ref={logContainerRef} className="p-4 font-mono text-sm text-gray-300 h-64 overflow-auto">
+              <div ref={logContainerRef} className="p-2 font-mono text-[10px] text-gray-300 h-40 overflow-auto">
                 {activeStage && (
                     <div>
                       {stages
