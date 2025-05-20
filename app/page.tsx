@@ -12,8 +12,8 @@ import EducationTimeline from "./components/education-timeline"
 import AnimatedBackground from "./components/animated-background"
 import CICDPipelineAnimation from "./components/cicd-pipeline-animation"
 import PipelineBackground from "./components/pipeline-background"
-
-
+import ContactDownloadButton from "./components/contact-download-button"
+import WhatsAppButton from "./components/whatsapp-button"
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -155,24 +155,46 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-3">
-                  <a
-                      href="https://github.com/Matan-Shabi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-gradient-to-r from-[#333] to-[#444] hover:from-[#444] hover:to-[#555] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
-                  >
-                    <Github size={16} className="md:w-[18px] md:h-[18px]" />
-                    GitHub
-                  </a>
-                  <a
-                      href="https://linkedin.com/in/matan-shabi"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-gradient-to-r from-[#0077B5] to-[#0A66C2] hover:from-[#0A66C2] hover:to-[#0077B5] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
-                  >
-                    <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
-                    LinkedIn
-                  </a>
+                  <div className="flex space-x-2">
+                    <a
+                        href="https://github.com/Matan-Shabi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-gradient-to-r from-[#333] to-[#444] hover:from-[#444] hover:to-[#555] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
+                    >
+                      <Github size={16} className="md:w-[18px] md:h-[18px]" />
+                      GitHub
+                    </a>
+                    <a
+                        href="https://linkedin.com/in/matan-shabi"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 bg-gradient-to-r from-[#0077B5] to-[#0A66C2] hover:from-[#0A66C2] hover:to-[#0077B5] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
+                    >
+                      <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
+                      LinkedIn
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex justify-center md:justify-start mt-3">
+                  <div className="flex space-x-3">
+                    <ContactDownloadButton
+                        contactDetails={{
+                          name: "Matan Shabi",
+                          phoneNumber: "+972-52-8885896",
+                          email: "matan.shabi20@gmail.com",
+                          website: "https://matan-shabi.com",
+                          linkedin: "https://linkedin.com/in/matan-shabi",
+                          jobTitle: "DevOps Engineer",
+                        }}
+                        variant="icon-only"
+                    />
+                    <WhatsAppButton
+                        phoneNumber="+972528885896"
+                        message="Hi Matan, I saw your portfolio and would like to connect!"
+                    />
+                  </div>
                 </div>
 
                 <div className="mt-10 animate-bounce-slow hidden md:flex justify-center md:justify-start">
@@ -489,7 +511,7 @@ export default function Home() {
                       className="flex items-center gap-3 md:gap-4 text-gray-300 hover:text-[#FF9900] group transition-colors"
                   >
                     <div className="bg-[#FF9900]/20 p-2 md:p-3 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
-                      <Phone size={18} className="md:w-6 md:h-6 text-[#FF9900]" />
+                      <Phone size={18} className="md:w-6 md:h-6 text-[#FF99 কিন্তon]" />
                     </div>
                     <div>
                       <p className="font-medium text-sm md:text-base">Phone</p>
@@ -528,13 +550,26 @@ export default function Home() {
                 <div className="mt-6 md:mt-8 flex justify-center">
                   <QRCode />
                 </div>
+                <div className="flex justify-center md:justify-start mt-3">
+                  <div className="flex space-x-3">
+                    <ContactDownloadButton
+                        contactDetails={{
+                          name: "Matan Shabi",
+                          phoneNumber: "+972-52-8885896",
+                          email: "matan.shabi20@gmail.com",
+                          website: "https://matan-shabi.com",
+                          linkedin: "https://linkedin.com/in/matan-shabi",
+                        }}
+                        variant="icon-only"
+                    />
+                    <WhatsAppButton
+                        phoneNumber="+972528885896"
+                        message="Hi Matan, I saw your portfolio and would like to connect!"
+                    />
+                  </div>
+                </div>
               </div>
-
-
             </div>
-
-            {/* Mobile Contact Form */}
-
           </div>
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
           <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
