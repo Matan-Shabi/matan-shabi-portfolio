@@ -19,12 +19,31 @@ const firaCode = Fira_Code({
 })
 
 export const metadata: Metadata = {
-  title: "Matan Shabi | DevOps & Cloud Engineer",
+  title: "Matan Shabi | DevOps, Cloud Security & CI/CD",
   description:
-    "DevOps Engineer specializing in AWS, Kubernetes, and CI/CD pipelines. Automating the cloud, one pipeline at a time.",
-  keywords: ["DevOps", "Cloud Engineer", "AWS", "Kubernetes", "CI/CD", "Terraform", "Docker"],
-    generator: 'v0.dev'
-}
+      "Cloud & DevOps Engineer with hands-on experience in AWS, CI/CD, Kubernetes, and cybersecurity. Specialized in cloud infrastructure, automation, and vulnerability research.",
+  keywords: [
+    "DevOps",
+    "Cloud Security",
+    "DevSecOps",
+    "AWS",
+    "Kubernetes",
+    "CI/CD",
+    "Jenkins",
+    "Docker",
+    "Terraform",
+    "Cybersecurity",
+    "OWASP",
+    "Penetration Testing",
+    "Heartbleed",
+    "Unsigned JWT",
+    "Vulnerable Library",
+    "Python",
+    "GitHub Actions",
+    "Matan Shabi"
+  ],
+  generator: "Next.js | v0.dev",
+};
 
 export default function RootLayout({
   children,

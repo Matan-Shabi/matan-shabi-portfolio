@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Download, Mail, Github, Linkedin, Phone, ChevronDown, Menu, X } from "lucide-react"
+import { Eye,Mail, Github, Linkedin, Phone, ChevronDown, Menu, X } from "lucide-react"
 import { useState } from "react"
 import QRCode from "./components/qr-code"
 import TechStackGridAdvanced from "./components/tech-stack-grid-advanced"
@@ -140,10 +140,11 @@ export default function Home() {
                   <a
                       href="/Matan-Shabi-CV%20.pdf"
                       className="flex items-center gap-2 bg-gradient-to-r from-[#232F3E] to-[#2d3b4d] hover:from-[#2d3b4d] hover:to-[#3a4a5e] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
-                      download
+                      target="_blank"
+                      rel="noopener noreferrer"
                   >
-                    <Download size={16} className="md:w-[18px] md:h-[18px]" />
-                    Download Resume
+                    <Eye size={16} className="md:w-[18px] md:h-[18px]" />
+                    View Resume
                   </a>
                   <a
                       href="#contact"
