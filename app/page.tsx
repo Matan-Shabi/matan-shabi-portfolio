@@ -138,7 +138,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap justify-center md:justify-start gap-3">
                   <a
-                      href="/Matan-Shabi-CV%20.pdf"
+                      href="/Matan-Shabi-CV.pdf"
                       className="flex items-center gap-2 bg-gradient-to-r from-[#232F3E] to-[#2d3b4d] hover:from-[#2d3b4d] hover:to-[#3a4a5e] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
                       target="_blank"
                       rel="noopener noreferrer"
