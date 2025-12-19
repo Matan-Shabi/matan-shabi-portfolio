@@ -6,7 +6,7 @@ import Image from "next/image"
 
 interface TechItem {
   name: string
-  icon: string | React.ReactNode
+  icon: string
   description: string
 }
 
