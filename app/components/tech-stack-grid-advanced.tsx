@@ -93,6 +93,7 @@ export default function TechStackGridAdvanced() {
         { name: "Git", icon: "https://cdn.simpleicons.org/git", description: "Version control" },
         { name: "GitHub", icon: "https://cdn.simpleicons.org/github", description: "Repository hosting" },
         { name: "Azure DevOps", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azuredevops/azuredevops-original.svg", description: "CI/CD & project management" },
+        { name: "JFrog Artifactory", icon: "https://cdn.simpleicons.org/jfrog", description: "Binary repository manager" },
       ],
     },
     {
