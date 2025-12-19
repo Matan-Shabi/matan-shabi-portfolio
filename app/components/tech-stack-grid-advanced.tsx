@@ -102,6 +102,8 @@ export default function TechStackGridAdvanced() {
       items: [
         { name: "Prometheus", icon: "https://cdn.simpleicons.org/prometheus", description: "Monitoring system" },
         { name: "Grafana", icon: "https://cdn.simpleicons.org/grafana", description: "Visualization platform" },
+        { name: "Datadog", icon: "https://cdn.simpleicons.org/datadog", description: "Cloud monitoring and analytics" },
+        { name: "Draftt", icon: "https://www.draftt.io/favicon.ico", description: "Monitoring and observability platform" },
       ],
     },
     {
