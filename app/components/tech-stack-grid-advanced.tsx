@@ -2,10 +2,11 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { Aws } from '@lobehub/icons';
 
 interface TechItem {
   name: string
-  icon: string
+  icon: string | React.ReactNode
   description: string
 }
 
@@ -71,7 +72,7 @@ export default function TechStackGridAdvanced() {
       items: [
         {
           name: "AWS",
-          icon: "https://cdn.simpleicons.org/amazon/FF9900",
+          icon: <Aws.Color size={56} />,
           description: "Cloud provider",
         },
         { name: "Terraform", icon: "https://cdn.simpleicons.org/terraform", description: "Infrastructure as Code" },

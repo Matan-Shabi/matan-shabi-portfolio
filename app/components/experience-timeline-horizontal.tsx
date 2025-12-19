@@ -43,9 +43,9 @@ export default function ExperienceTimelineHorizontal() {
       company: "MSD Animal Health Technology Labs",
       period: "2025 - Present",
       description: [
-        "Architected and launched a scalable, modular admin panel frontend with Next.js, TypeScript and Feature-Sliced Design, delivering reusable UI components and dynamic role-based access control (RBAC).",
-        "Built and optimized a backend API using Express.js, Prisma & SQL Server, modeling fine-grained permissions and tuning database indices for fast, secure data access.",
-        "Deployed the full stack on Windows Server 2022, configuring IIS for hosting and PM2 for process management enabling zero-downtime restarts, auto-recovery, and centralized log collection.",
+        "",
+        "",
+        "",
       ],
     },
   ]
