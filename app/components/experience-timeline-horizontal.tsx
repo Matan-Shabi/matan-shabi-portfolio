@@ -5,14 +5,15 @@ import { CalendarDays, Building2, ArrowRight } from "lucide-react"
 
 export default function ExperienceTimelineHorizontal() {
   const experiences = [
+   
     {
-      title: "Software Engineer",
-      company: "Accadia Software Technologies",
-      period: "Dec 2024 - Present",
+      title: "IT Technician",
+      company: "Poria Hospital",
+      period: "2019-2020",
       description: [
-        "Architected and launched a scalable, modular admin panel frontend with Next.js, TypeScript and Feature-Sliced Design, delivering reusable UI components and dynamic role-based access control (RBAC).",
-        "Built and optimized a backend API using Express.js, Prisma & SQL Server, modeling fine-grained permissions and tuning database indices for fast, secure data access.",
-        "Deployed the full stack on Windows Server 2022, configuring IIS for hosting and PM2 for process management enabling zero-downtime restarts, auto-recovery, and centralized log collection.",
+        "Managed computer and network systems",
+        "Resolved hardware and software issues",
+        "Provided technical support to end-users",
       ],
     },
     {
@@ -28,13 +29,23 @@ export default function ExperienceTimelineHorizontal() {
       ],
     },
     {
-      title: "IT Technician",
-      company: "Poria Hospital",
-      period: "2019-2020",
+      title: "Software Engineer",
+      company: "Accadia Software Technologies",
+      period: "2024 - 2025",
       description: [
-        "Managed computer and network systems",
-        "Resolved hardware and software issues",
-        "Provided technical support to end-users",
+        "Architected and launched a scalable, modular admin panel frontend with Next.js, TypeScript and Feature-Sliced Design, delivering reusable UI components and dynamic role-based access control (RBAC).",
+        "Built and optimized a backend API using Express.js, Prisma & SQL Server, modeling fine-grained permissions and tuning database indices for fast, secure data access.",
+        "Deployed the full stack on Windows Server 2022, configuring IIS for hosting and PM2 for process management enabling zero-downtime restarts, auto-recovery, and centralized log collection.",
+      ],
+    },
+    {
+      title: "DevOps Engineer",
+      company: "MSD Animal Health Technology Labs",
+      period: "2025 - Present",
+      description: [
+        "Architected and launched a scalable, modular admin panel frontend with Next.js, TypeScript and Feature-Sliced Design, delivering reusable UI components and dynamic role-based access control (RBAC).",
+        "Built and optimized a backend API using Express.js, Prisma & SQL Server, modeling fine-grained permissions and tuning database indices for fast, secure data access.",
+        "Deployed the full stack on Windows Server 2022, configuring IIS for hosting and PM2 for process management enabling zero-downtime restarts, auto-recovery, and centralized log collection.",
       ],
     },
   ]
