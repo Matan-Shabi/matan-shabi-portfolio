@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Aws } from '@lobehub/icons';
+
 
 interface TechItem {
   name: string
@@ -72,7 +72,7 @@ export default function TechStackGridAdvanced() {
       items: [
         {
           name: "AWS",
-          icon: <Aws.Color size={56} />,
+          icon: 'https://a0.awsstatic.com/libra-css/images/logos/aws_logo_smile_1200x630.png',
           description: "Cloud provider",
         },
         { name: "Terraform", icon: "https://cdn.simpleicons.org/terraform", description: "Infrastructure as Code" },
