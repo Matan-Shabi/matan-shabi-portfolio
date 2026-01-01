@@ -43,9 +43,11 @@ export default function ExperienceTimelineHorizontal() {
       company: "MSD Animal Health Technology Labs",
       period: "2025 - Present",
       description: [
-        "",
-        "",
-        "",
+        "Planned and implemented terraform modules migration to reduce by 15% cloud resources costs at production environment.",
+        "Led a team in a hackathon and won 5th place and implemented the outcomes as internal tools to migrate the organization from AZDO to Github.",
+        "Maintained AZDO legacy pipelines at production environment.",
+        "Authored ADRs, Onboarding guides,deployment.",
+        "Developed an automated policy enforcing system on the organizational github."
       ],
     },
   ]
