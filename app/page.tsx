@@ -127,7 +127,7 @@ export default function Home() {
 
               <div className="w-full md:w-3/5 animate-fade-in text-center md:text-left">
                 <div className="text-[1.25rem] inline-block bg-gradient-to-r from-[#FF9900] to-[#FF5757] text-black font-medium px-4 py-1 rounded-full mb-4 animate-bounce-subtle">
-                  Available for DevOps, DevSecOps Positions
+                  Available for DevOps, DevSecOps,Platform Positions
                 </div>
                 <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-3 text-gradient">Matan Shabi</h1>
                 <h2 className="text-[1.35rem] md:text-xl lg:text-2xl text-[#FF9900] font-mono  mb-3 animate-pulse-slow">
