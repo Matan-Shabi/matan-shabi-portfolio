@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Inter, Fira_Code } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -35,6 +34,30 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
 
+  openGraph: {
+    type: "website",
+    url: "https://matan-shabi.com",
+    title: "Matan Shabi – DevOps & Cloud Security Engineer",
+    description:
+      "Portfolio of Matan Shabi (מתן שאבי) – DevOps & Cloud-Security engineer specializing in AWS, Kubernetes, and CI/CD.",
+    images: [
+      {
+        url: "/profile-photo.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Matan Shabi – DevOps & Cloud Security Engineer",
+      },
+    ],
+    siteName: "Matan Shabi Portfolio",
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Matan Shabi – DevOps & Cloud Security Engineer",
+    description:
+      "Portfolio of Matan Shabi – DevOps & Cloud-Security engineer specializing in AWS, Kubernetes, and CI/CD.",
+    images: ["/profile-photo.jpeg"],
+  },
 };
 
 
@@ -47,26 +70,48 @@ export const viewport: Viewport = {
   ],
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+const ld = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://matan-shabi.com/#person",
+      name: "Matan Shabi",
+      alternateName: "מתן שאבי",
+      jobTitle: "DevOps & Cloud-Security Engineer",
+      url: "https://matan-shabi.com",
+      image: "https://matan-shabi.com/profile-photo.jpeg",
+      sameAs: [
+        "https://www.linkedin.com/in/matan-shabi/",
+        "https://github.com/Matan-Shabi",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://matan-shabi.com/#website",
+      url: "https://matan-shabi.com",
+      name: "Matan Shabi – DevOps & Cloud Security",
+      description:
+        "Portfolio of Matan Shabi, DevOps & Cloud-Security engineer specializing in AWS, Kubernetes, and CI/CD.",
+      publisher: { "@id": "https://matan-shabi.com/#person" },
+    },
+  ],
+};
 
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: "Matan Shabi",
-    alternateName: "מתן שאבי",
-    jobTitle: "DevOps & Cloud-Security Engineer",
-    url: "https://matan-shabi.com",
-    sameAs: ["https://www.linkedin.com/in/matan-shabi/","https://github.com/Matan-Shabi"],
-  };
-
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-      <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }}
+        />
+      </head>
       <body className={`${inter.variable} ${fira.variable} font-sans`}>
-      {children}
-      <Script id="ld-json" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
-      <SpeedInsights />
-      <Analytics />
+        {children}
+        <SpeedInsights />
+        <Analytics />
       </body>
-      </html>
+    </html>
   );
 }

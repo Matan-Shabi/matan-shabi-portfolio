@@ -1,0 +1,44 @@
+# Matan Shabi – DevOps & Cloud Security Engineer
+
+> Portfolio of Matan Shabi (מתן שאבי), a DevOps & Cloud-Security engineer based in Israel. Specializes in AWS, Kubernetes, CI/CD pipelines, Docker, Terraform, and DevSecOps. Available for DevOps and DevSecOps positions.
+
+## Main Content
+
+- [Portfolio Home](https://matan-shabi.com): Full portfolio including experience, skills, projects, and contact information.
+
+## About
+
+Matan Shabi is a detail-oriented DevOps Engineer with a strong foundation in cloud technologies (AWS), CI/CD pipelines (Jenkins, GitHub Actions), and container orchestration (Docker, Kubernetes). Skilled in Python, Java, and infrastructure automation. Holds experience in cloud security and DevSecOps practices.
+
+## Experience
+
+Current and recent roles include DevOps Engineer positions focusing on secure cloud infrastructure, automated deployment pipelines, and platform engineering. Former Vice Chairman of the Kinneret Student Association (2022–2025), managing a team of 30 and a 1M NIS budget.
+
+## Technical Skills
+
+- Cloud: AWS (EC2, S3, Lambda, EKS, IAM, CloudFront, Amplify)
+- Containers: Docker, Kubernetes
+- CI/CD: Jenkins, GitHub Actions, GitLab CI
+- IaC: Terraform, AWS CDK
+- Security: DevSecOps, Pen-testing, Cybersecurity
+- Languages: Python, Java, Bash
+- Monitoring: Datadog, Grafana
+- Artifacts: JFrog Artifactory
+
+## Projects
+
+- [WorldOfGame](https://github.com/Matan-Shabi/WorldOfGame): Python-based mini-games platform with full CI/CD pipeline, Docker, and Selenium testing.
+- Essentia User Management System: Modular admin panel with role-based permissions using Next.js and Express.js.
+- Mulligan Parking System: Distributed parking management with RabbitMQ, MongoDB, and AI recommendations.
+
+## Contact
+
+- Email: matan.shabi20@gmail.com
+- Phone: +972-52-8885896
+- LinkedIn: https://www.linkedin.com/in/matan-shabi/
+- GitHub: https://github.com/Matan-Shabi
+- Website: https://matan-shabi.com
+
+## Optional
+
+- [CV / Resume](https://matan-shabi.com/Matan-Shabi-CV.pdf): Full curriculum vitae in PDF format.

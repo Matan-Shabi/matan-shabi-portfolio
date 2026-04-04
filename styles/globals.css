@@ -45,6 +45,19 @@ body {
   }
 }
 
+/* Respect OS-level reduced-motion preference (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-fade-in-delayed,
+  .animate-bounce-subtle,
+  .animate-bounce-slow,
+  .animate-pulse-slow,
+  .animate-float,
+  .animate-fade-down {
+    animation: none;
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

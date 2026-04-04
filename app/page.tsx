@@ -20,11 +20,19 @@ export default function Home() {
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-[#0F1924] to-[#1A1A1A] text-white">
+        {/* Skip navigation – keyboard accessibility (WCAG 2.4.1) */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-[#FF9900] focus:text-black focus:font-semibold focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-black"
+        >
+          Skip to main content
+        </a>
+
         {/* Pipeline Background */}
         <PipelineBackground />
 
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#232F3E]/90 to-[#0F1924]/90 backdrop-blur-sm border-b border-[#FF9900]/20">
+        <nav aria-label="Main" className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-[#232F3E]/90 to-[#0F1924]/90 backdrop-blur-sm border-b border-[#FF9900]/20">
           <div className="container mx-auto px-4 py-4 flex justify-between items-center">
             <div className="font-bold text-xl text-[#FF9900]">
               <span className="text-white">Matan</span> Shabi
@@ -32,10 +40,13 @@ export default function Home() {
 
             {/* Mobile Menu Button */}
             <button
-                className="md:hidden text-white hover:text-[#FF9900] focus:outline-none"
+                className="md:hidden text-white hover:text-[#FF9900] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9900] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0F1924] rounded-sm"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
 
             {/* Desktop Navigation */}
@@ -63,7 +74,7 @@ export default function Home() {
 
           {/* Mobile Menu */}
           {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0F1924]/95 backdrop-blur-md border-b border-[#FF9900]/20 animate-fade-down">
+              <div id="mobile-menu" className="md:hidden bg-[#0F1924]/95 backdrop-blur-md border-b border-[#FF9900]/20 animate-fade-down">
                 <div className="flex flex-col space-y-4 p-4">
                   <Link
                       href="#about"
@@ -111,6 +122,8 @@ export default function Home() {
               </div>
           )}
         </nav>
+
+        <main id="main-content">
 
         {/* Hero Section */}
         <section className="relative pt-24 pb-16 px-4 md:pt-32 md:pb-24 overflow-hidden">
@@ -576,6 +589,8 @@ export default function Home() {
           <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
         </section>
 
+        </main>
+
         {/* Footer */}
         <footer className="py-6 md:py-8 px-4 border-t border-[#FF9900]/20 bg-[#0F1924]">
           <div className="container mx-auto max-w-5xl">
@@ -588,23 +603,26 @@ export default function Home() {
                     href="https://linkedin.com/in/matan-shabi"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Matan Shabi on LinkedIn"
                     className="bg-[#232F3E] p-2 rounded-full text-gray-400 hover:text-[#FF9900] hover:bg-[#2d3b4d] transition-colors"
                 >
-                  <Linkedin size={16} className="md:w-5 md:h-5" />
+                  <Linkedin size={16} className="md:w-5 md:h-5" aria-hidden="true" />
                 </a>
                 <a
                     href="https://github.com/Matan-Shabi"
                     target="_blank"
                     rel="noopener noreferrer"
+                    aria-label="Matan Shabi on GitHub"
                     className="bg-[#232F3E] p-2 rounded-full text-gray-400 hover:text-[#FF9900] hover:bg-[#2d3b4d] transition-colors"
                 >
-                  <Github size={16} className="md:w-5 md:h-5" />
+                  <Github size={16} className="md:w-5 md:h-5" aria-hidden="true" />
                 </a>
                 <a
                     href="mailto:matan.shabi20@gmail.com"
+                    aria-label="Send email to Matan Shabi"
                     className="bg-[#232F3E] p-2 rounded-full text-gray-400 hover:text-[#FF9900] hover:bg-[#2d3b4d] transition-colors"
                 >
-                  <Mail size={16} className="md:w-5 md:h-5" />
+                  <Mail size={16} className="md:w-5 md:h-5" aria-hidden="true" />
                 </a>
               </div>
             </div>

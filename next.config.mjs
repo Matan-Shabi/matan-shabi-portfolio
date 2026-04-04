@@ -7,13 +7,17 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
-    domains: [
-      "cdn-icons-png.flaticon.com",
-      "upload.wikimedia.org",
-      "raw.githubusercontent.com",
-      "playwright.dev",
-      "github.com"
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "inline",
+    contentSecurityPolicy: "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+    remotePatterns: [
+      { hostname: "cdn-icons-png.flaticon.com" },
+      { hostname: "cdn.simpleicons.org" },
+      { hostname: "a0.awsstatic.com" },
+      { hostname: "upload.wikimedia.org" },
+      { hostname: "raw.githubusercontent.com" },
+      { hostname: "playwright.dev" },
+      { hostname: "github.com" },
     ],
   },
 }
