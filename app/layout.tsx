@@ -20,9 +20,9 @@ export const metadata: Metadata = {
       "מתן שאבי (Matan Shabi) – DevOps & Cloud-Security engineer (AWS, Kubernetes, CI/CD). Builds secure, automated cloud platforms.",
   keywords: [
     "Matan Shabi","מתן שאבי",
-    "DevOps","Cloud Security","AWS","Kubernetes","CI/CD","Terraform","Docker","DevSecOps",
+    "DevOps","Cloud Security","AWS","Kubernetes","CI/CD","Terraform","Docker","Platform",
     "Jenkins","Cybersecurity","Pen-testing",
-    "Python","GitHub Actions",
+    "Python","GitHub Actions","git","Cloud","Infrastructure","DevEx","Production",
   ],
 
   icons: {
