@@ -13,7 +13,7 @@ Read ai-docs/web-performance-guide.md for web performance and Core Web Vitals.
 
 ## Site context
 
-**Framework:** Next.js 15 (App Router) — server-rendered, not a Vite SPA.
+**Framework:** Next.js 16 (App Router, Turbopack default) — server-rendered, not a Vite SPA. React 19.2.
 **Deployment:** Vercel (uses `@vercel/analytics` and `@vercel/speed-insights`). AWS guide does not apply.
 **Domain:** https://matan-shabi.com
 **Owner:** Matan Shabi (מתן שאבי) — DevOps & Cloud-Security Engineer, available for hire.
@@ -56,3 +56,32 @@ Read ai-docs/web-performance-guide.md for web performance and Core Web Vitals.
 - Image optimisation ✅ — Next.js image optimisation enabled; external domains whitelisted via `remotePatterns`.
 - Fonts ✅ — loaded via `next/font/google` (Inter, Fira Code); no `@import` in CSS.
 - **OG image size** ⚠️ — `profile-photo.jpeg` is not 1200×630. Replace with a proper OG image to avoid platform-side fetching delays.
+
+---
+
+## Project skills (`.agents/skills/`)
+
+Locally vendored skills available to agents working in this repo. Invoke via the Skill tool (or `/<name>`).
+
+**Next.js (directly relevant — this is a Next.js 15 App Router project):**
+- `next-best-practices` — Next.js best practices: file conventions, RSC boundaries, data patterns, async APIs, metadata, error handling, route handlers, image/font optimization, bundling. (reference rules, not user-invocable)
+- `next-cache-components` — Next.js 16+ Cache Components: PPR, `use cache` directive, `cacheLife`, `cacheTag`, `updateTag`.
+- `next-upgrade` — upgrade Next.js to the latest version via official migration guides and codemods. `[target-version]`
+
+**React / performance:**
+- `vercel-react-best-practices` — Vercel Engineering's React + Next.js performance guide (70 rules across 8 categories). Apply when writing, reviewing, or refactoring React/Next.js code.
+- `vercel-react-native-skills` — React Native / Expo best practices. **Not applicable** to this web-only portfolio.
+
+**UI / design / components:**
+- `building-components` — building modern, accessible, composable UI components (ARIA, keyboard nav, design tokens, registry publishing).
+- `web-design-guidelines` — review UI code against Vercel's Web Interface Guidelines (accessibility, UX, design). `<file-or-pattern>`
+- `before-and-after` — capture before/after screenshots of pages/elements for visual diffs and PR screenshots.
+
+## Reference guides (`ai-docs/`)
+
+Domain guides referenced at the top of this file (read before related work):
+- `seo-llmo-guide.md` — SEO / LLMO practices.
+- `web-accessibility-guide.md` — web accessibility (WCAG 2.2).
+- `web-performance-guide.md` — web performance and Core Web Vitals.
+- `aws-spa-deployment-guide.md` — AWS SPA deployment. **Does not apply** (this site deploys on Vercel).
+- `google-analytics-guide.md` — GA4 implementation. **Not implemented** (Vercel Analytics only).
