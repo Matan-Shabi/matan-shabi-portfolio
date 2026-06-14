@@ -141,15 +141,23 @@ export default function TechStackGridAdvanced() {
         <div className="grid grid-cols-1 gap-1">
           {categories.map((category) => (
               <div key={category.id} className="relative">
+                {/* Mobile: horizontal label above the grid */}
                 <div
-                    className="absolute left-0 top-0 bottom-0 w-[120px] flex items-center justify-center p-2 font-bold text-black z-10"
+                    className="md:hidden w-full flex items-center px-3 py-1.5 font-bold text-black text-sm"
+                    style={{ backgroundColor: category.color }}
+                >
+                  {category.name}
+                </div>
+                {/* Desktop: rotated label on the left */}
+                <div
+                    className="hidden md:flex absolute left-0 top-0 bottom-0 w-[120px] items-center justify-center p-2 font-bold text-black z-10"
                     style={{ backgroundColor: category.color }}
                 >
                   <span className="transform -rotate-90 text-lg whitespace-nowrap">{category.name}</span>
                 </div>
 
                 <div
-                    className="ml-[120px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 p-1 bg-[#232F3E]/80 border-l-4"
+                    className="md:ml-[120px] grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1 p-1 bg-[#232F3E]/80 md:border-l-4"
                     style={{ borderColor: category.color }}
                 >
                   {category.items.map((tech) => (

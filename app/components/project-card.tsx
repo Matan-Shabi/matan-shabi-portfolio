@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from "react"
 import Image from "next/image"
-import { Github, ExternalLink } from "lucide-react"
+import { Github, ExternalLink, Lock } from "lucide-react"
 
 interface ProjectCardProps {
   title: string
   description: string
   techStack: string[]
-  githubUrl: string
+  githubUrl?: string
   demoUrl?: string
   image?: string
 }
@@ -73,17 +73,26 @@ export default function ProjectCard({ title, description, techStack, githubUrl, 
         </div>
       </div>
       <div className="border-t border-[#FF9900]/20 p-4 flex justify-between">
-        <a
-          href={githubUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#FF9900] transition-colors group"
-        >
-          <div className="bg-[#0F1924] p-1 rounded-full group-hover:bg-[#FF9900]/20 transition-colors">
-            <Github size={16} />
-          </div>
-          <span>GitHub</span>
-        </a>
+        {githubUrl ? (
+          <a
+            href={githubUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-sm text-gray-300 hover:text-[#FF9900] transition-colors group"
+          >
+            <div className="bg-[#0F1924] p-1 rounded-full group-hover:bg-[#FF9900]/20 transition-colors">
+              <Github size={16} />
+            </div>
+            <span>GitHub</span>
+          </a>
+        ) : (
+          <span className="flex items-center gap-2 text-sm text-gray-500 cursor-default">
+            <div className="bg-[#0F1924] p-1 rounded-full">
+              <Lock size={16} />
+            </div>
+            <span>Private Repo</span>
+          </span>
+        )}
         {demoUrl && (
           <a
             href={demoUrl}

@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Eye,Mail, Github, Linkedin, Phone, ChevronDown, Menu, X } from "lucide-react"
-import { useState } from "react"
+import { Eye, Mail, Github, Linkedin, Phone, ChevronDown, Menu, X, Users } from "lucide-react"
+import { useState, useEffect } from "react"
 import QRCode from "./components/qr-code"
 import TechStackGridAdvanced from "./components/tech-stack-grid-advanced"
 import ProjectCard from "./components/project-card"
@@ -18,6 +18,21 @@ import { CONTACT } from "./constants/contact"
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState<string>("")
+
+  useEffect(() => {
+    const sections = document.querySelectorAll<HTMLElement>("section[id]")
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id)
+        })
+      },
+      { rootMargin: "-40% 0px -55% 0px" }
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
 
   return (
       <div className="min-h-screen bg-gradient-to-b from-[#0F1924] to-[#1A1A1A] text-white">
@@ -52,24 +67,11 @@ export default function Home() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-6">
-              <Link href="#about" className="text-sm hover:text-[#FF9900] transition-colors">
-                About
-              </Link>
-              <Link href="#experience" className="text-sm hover:text-[#FF9900] transition-colors">
-                Experience
-              </Link>
-              <Link href="#education" className="text-sm hover:text-[#FF9900] transition-colors">
-                Education
-              </Link>
-              <Link href="#tech-stack" className="text-sm hover:text-[#FF9900] transition-colors">
-                Skills
-              </Link>
-              <Link href="#projects" className="text-sm hover:text-[#FF9900] transition-colors">
-                Projects
-              </Link>
-              <Link href="#contact" className="text-sm hover:text-[#FF9900] transition-colors">
-                Contact
-              </Link>
+              {([ ["#about","about","About"], ["#experience","experience","Experience"], ["#education","education","Education"], ["#tech-stack","tech-stack","Skills"], ["#projects","projects","Projects"], ["#contact","contact","Contact"] ] as const).map(([href, id, label]) => (
+                <Link key={id} href={href} className={`text-sm transition-colors pb-0.5 ${activeSection === id ? "text-[#FF9900] border-b border-[#FF9900]" : "text-gray-300 hover:text-[#FF9900]"}`}>
+                  {label}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -77,48 +79,16 @@ export default function Home() {
           {mobileMenuOpen && (
               <div id="mobile-menu" className="md:hidden bg-[#0F1924]/95 backdrop-blur-md border-b border-[#FF9900]/20 animate-fade-down">
                 <div className="flex flex-col space-y-4 p-4">
-                  <Link
-                      href="#about"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
+                  {([ ["#about","about","About"], ["#experience","experience","Experience"], ["#education","education","Education"], ["#tech-stack","tech-stack","Skills"], ["#projects","projects","Projects"], ["#contact","contact","Contact"] ] as const).map(([href, id, label]) => (
+                    <Link
+                      key={id}
+                      href={href}
+                      className={`text-base py-2 px-4 rounded-md transition-colors ${activeSection === id ? "bg-[#FF9900]/20 text-[#FF9900]" : "hover:bg-[#232F3E]/50 hover:text-[#FF9900]"}`}
                       onClick={() => setMobileMenuOpen(false)}
-                  >
-                    About
-                  </Link>
-                  <Link
-                      href="#experience"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Experience
-                  </Link>
-                  <Link
-                      href="#education"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Education
-                  </Link>
-                  <Link
-                      href="#tech-stack"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Skills
-                  </Link>
-                  <Link
-                      href="#projects"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Projects
-                  </Link>
-                  <Link
-                      href="#contact"
-                      className="text-base py-2 px-4 hover:bg-[#232F3E]/50 hover:text-[#FF9900] rounded-md transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Contact
-                  </Link>
+                    >
+                      {label}
+                    </Link>
+                  ))}
                 </div>
               </div>
           )}
@@ -140,16 +110,29 @@ export default function Home() {
               </div>
 
               <div className="w-full md:w-3/5 animate-fade-in text-center md:text-left">
-                <div className="text-[1.25rem] inline-block bg-gradient-to-r from-[#FF9900] to-[#FF5757] text-black font-medium px-4 py-1 rounded-full mb-4 animate-bounce-subtle">
-                  Available for DevOps, DevSecOps,Platform Positions
+                <div className="text-[1.25rem] inline-block bg-gradient-to-r from-[#FF9900] to-[#FFCC44] text-black font-medium px-4 py-1 rounded-full mb-2 animate-bounce-subtle">
+                  Available for DevOps, DevSecOps, Platform Engineering Positions
                 </div>
+                <p className="text-sm text-gray-400 mb-4">Open to remote · hybrid </p>
                 <h1 className="text-3xl md:text-4xl lg:text-6xl font-bold mb-3 text-gradient">Matan Shabi</h1>
-                <h2 className="text-[1.35rem] md:text-xl lg:text-2xl text-[#FF9900] font-mono  mb-3 animate-pulse-slow">
-                  DevOps Engineer
+                <h2 className="text-[1.35rem] md:text-xl lg:text-2xl text-[#FF9900] font-mono mb-3 animate-pulse-slow">
+                  DevOps &amp; Cloud-Security Engineer
                 </h2>
-                <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-6 max-w-lg mx-auto md:mx-0">
-                  "Automating the cloud, one pipeline at a time. Building robust, scalable, and secure infrastructure."
+                <p className="text-base md:text-lg lg:text-xl text-gray-300 mb-4 max-w-lg mx-auto md:mx-0">
+                  From Terraform modules to GitHub policies - building the infrastructure that lets engineering teams ship faster and more securely.
                 </p>
+                <div className="flex flex-wrap justify-center md:justify-start gap-6 md:gap-10 mb-6">
+                  {([
+                    { value: "15%", label: "Cloud cost reduction" },
+                    { value: "30+", label: "Team members led" },
+                    { value: "1M₪", label: "Budget managed" },
+                  ] as const).map((stat) => (
+                    <div key={stat.label} className="text-center">
+                      <div className="text-2xl font-bold text-[#FF9900]">{stat.value}</div>
+                      <div className="text-xs text-gray-400 mt-0.5">{stat.label}</div>
+                    </div>
+                  ))}
+                </div>
                 <div className="flex flex-wrap justify-center md:justify-start gap-3">
                   <a
                       href="/Matan-Shabi-CV.pdf"
@@ -162,54 +145,48 @@ export default function Home() {
                   </a>
                   <a
                       href="#contact"
-                      className="flex items-center gap-2 bg-gradient-to-r from-[#FF9900] to-[#FF5757] hover:from-[#FF5757] hover:to-[#FF9900] text-black font-medium px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
+                      className="flex items-center gap-2 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] hover:from-[#FFCC44] hover:to-[#FF9900] text-black font-medium px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
                   >
                     <Mail size={16} className="md:w-[18px] md:h-[18px]" />
                     Contact Me
                   </a>
                 </div>
 
-                <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-3">
-                  <div className="flex space-x-2">
-                    <a
-                        href={CONTACT.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-gradient-to-r from-[#333] to-[#444] hover:from-[#444] hover:to-[#555] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
-                    >
-                      <Github size={16} className="md:w-[18px] md:h-[18px]" />
-                      GitHub
-                    </a>
-                    <a
-                        href={CONTACT.linkedin}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 bg-gradient-to-r from-[#0077B5] to-[#0A66C2] hover:from-[#0A66C2] hover:to-[#0077B5] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
-                    >
-                      <Linkedin size={16} className="md:w-[18px] md:h-[18px]" />
-                      LinkedIn
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex justify-center md:justify-start mt-3">
-                  <div className="flex space-x-3">
-                    <ContactDownloadButton
-                        contactDetails={{
-                          name: CONTACT.name,
-                          phoneNumber: CONTACT.phoneDisplay,
-                          email: CONTACT.email,
-                          website: CONTACT.website,
-                          linkedin: CONTACT.linkedin,
-                          jobTitle: CONTACT.jobTitle,
-                        }}
-                        variant="icon-only"
-                    />
-                    <WhatsAppButton
-                        phoneNumber={CONTACT.phone}
-                        message={CONTACT.whatsappMessage}
-                    />
-                  </div>
+                {/* Secondary icon row */}
+                <div className="flex justify-center md:justify-start gap-3 mt-4">
+                  <a
+                      href={CONTACT.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Matan Shabi on GitHub"
+                      className="w-10 h-10 flex items-center justify-center bg-[#232F3E] hover:bg-[#2d3b4d] text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md"
+                  >
+                    <Github size={18} aria-hidden="true" />
+                  </a>
+                  <a
+                      href={CONTACT.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Matan Shabi on LinkedIn"
+                      className="w-10 h-10 flex items-center justify-center bg-[#0077B5] hover:bg-[#0A66C2] text-white rounded-full transition-all duration-300 transform hover:scale-105 shadow-md"
+                  >
+                    <Linkedin size={18} aria-hidden="true" />
+                  </a>
+                  <ContactDownloadButton
+                      contactDetails={{
+                        name: CONTACT.name,
+                        phoneNumber: CONTACT.phoneDisplay,
+                        email: CONTACT.email,
+                        website: CONTACT.website,
+                        linkedin: CONTACT.linkedin,
+                        jobTitle: CONTACT.jobTitle,
+                      }}
+                      variant="icon-only"
+                  />
+                  <WhatsAppButton
+                      phoneNumber={CONTACT.phone}
+                      message={CONTACT.whatsappMessage}
+                  />
                 </div>
 
                 <div className="mt-10 animate-bounce-slow hidden md:flex justify-center md:justify-start">
@@ -240,15 +217,15 @@ export default function Home() {
           <div className="container mx-auto max-w-6xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">DevOps in Action</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
               <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-sm md:text-base">
-                Watch a live CI/CD pipeline in action - from code commit to production deployment
+                The kind of pipeline I build — automated from code push to production, including tests, security scans, and zero-downtime deployments.
               </p>
             </div>
             <CICDPipelineAnimation />
           </div>
           <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* About Me */}
@@ -260,17 +237,18 @@ export default function Home() {
           <div className="container mx-auto max-w-4xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">About Me</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
             <div className="prose prose-invert max-w-none bg-[#232F3E]/50 p-4 md:p-8 rounded-xl border border-[#FF9900]/20 shadow-xl backdrop-blur-sm animate-fade-in">
               <p className="text-base md:text-lg text-gray-300 leading-relaxed">
-                Detail-oriented DevOps Engineer with a strong foundation in cloud technologies (AWS), CI/CD pipelines
-                (Jenkins, Git), and container orchestration (Docker, Kubernetes). Skilled in Python, Java, and automation
-                tools. Seeking a DevOps role to leverage my technical expertise and problem-solving abilities to build and
-                maintain robust, scalable, and secure infrastructure.
+                DevOps &amp; Cloud-Security engineer with 5+ years across cloud infrastructure, full-stack development,
+                and IT operations. Most recently at MSD Animal Health (Merck), where I reduced cloud costs by 15%
+                through Terraform module migrations and built automated GitHub policy enforcement at the organisation
+                level. Experienced with AWS, Kubernetes, Terraform, Jenkins, GitHub Actions, and DevSecOps practices.
+                Actively seeking my next DevOps, DevSecOps, or Platform Engineering role.
               </p>
               <div className="mt-6 md:mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-                <div className="bg-[#0F1924]/50 p-4 md:p-6 rounded-lg border border-[#FF9900]/10 hover:border-[#FF9900]/30 transition-all duration-300 transform hover:scale-105">
+                <div className="bg-[#0F1924]/50 p-4 md:p-6 rounded-lg border border-[#FF9900]/10 hover:border-[#FF9900]/30 transition-all duration-300 transform hover:scale-[1.03]">
                   <h3 className="text-lg md:text-xl font-semibold mb-3 text-[#FF9900]">Contact Information</h3>
                   <ul className="space-y-3">
                     <li className="flex items-center gap-3 group">
@@ -326,7 +304,7 @@ export default function Home() {
                         <div className="flex items-center">
                           <span className="text-gray-400 mr-2 text-xs md:text-sm">Proficient</span>
                           <div className="w-16 md:w-24 h-2 bg-[#232F3E] rounded-full overflow-hidden">
-                            <div className="h-full w-4/5 bg-gradient-to-r from-[#FF9900] to-[#FF5757]"></div>
+                            <div className="h-full w-4/5 bg-gradient-to-r from-[#FF9900] to-[#FFCC44]"></div>
                           </div>
                         </div>
                       </li>
@@ -335,14 +313,14 @@ export default function Home() {
                         <div className="flex items-center">
                           <span className="text-gray-400 mr-2 text-xs md:text-sm">Native</span>
                           <div className="w-16 md:w-24 h-2 bg-[#232F3E] rounded-full overflow-hidden">
-                            <div className="h-full w-full bg-gradient-to-r from-[#FF9900] to-[#FF5757]"></div>
+                            <div className="h-full w-full bg-gradient-to-r from-[#FF9900] to-[#FFCC44]"></div>
                           </div>
                         </div>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="bg-[#0F1924]/50 p-4 md:p-6 rounded-lg border border-[#FF9900]/10 hover:border-[#FF9900]/30 transition-all duration-300 transform hover:scale-105">
+                  <div className="bg-[#0F1924]/50 p-4 md:p-6 rounded-lg border border-[#FF9900]/10 hover:border-[#FF9900]/30 transition-all duration-300 transform hover:scale-[1.03]">
                     <h3 className="text-lg md:text-xl font-semibold mb-3 text-[#FF9900]">Military Service</h3>
                     <p className="text-gray-300 text-sm md:text-base">
                       Team Leader and Electronics Instructor, Air Force Military Service (2017-2019)
@@ -353,7 +331,7 @@ export default function Home() {
             </div>
           </div>
           <div className="absolute bottom-0 right-0 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/4 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/4 left-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Professional Experience */}
@@ -365,12 +343,12 @@ export default function Home() {
           <div className="container mx-auto max-w-5xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Professional Experience</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
             <ExperienceTimelineHorizontal />
           </div>
           <div className="absolute top-1/2 right-0 w-1/4 h-1/4 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-1/4 w-1/3 h-1/3 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-1/4 w-1/3 h-1/3 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Education */}
@@ -384,12 +362,12 @@ export default function Home() {
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">
                 Education & Certifications
               </h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
             <EducationTimeline />
           </div>
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Tech Stack */}
@@ -401,7 +379,7 @@ export default function Home() {
           <div className="container mx-auto max-w-6xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Technical Skills</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
               <p className="text-gray-300 mt-4 max-w-2xl mx-auto text-sm md:text-base">
                 My technical expertise organized by domain and function.
               </p>
@@ -411,7 +389,7 @@ export default function Home() {
             </div>
           </div>
           <div className="absolute top-1/2 left-0 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Featured Projects */}
@@ -423,7 +401,7 @@ export default function Home() {
           <div className="container mx-auto max-w-5xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Featured Projects</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
               <ProjectCard
@@ -437,20 +415,18 @@ export default function Home() {
                   title="Essentia User Management System"
                   description="Built a modular admin panel with dynamic role-based permissions. Developed scalable frontend components using Feature-Sliced Design (Next.js) and a robust Express.js backend."
                   techStack={["Next.js", "PM2", "Express.js", "IIS"]}
-                  githubUrl="https://github.com/Matan-Shabi"
                   image="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
               />
               <ProjectCard
                   title="Mulligan Parking System"
                   description="A distributed parking management system using RabbitMQ, MongoDB, and AI-powered recommendations. Fully distributed and fault-tolerant parking system."
                   techStack={["Java", "MongoDB", "RabbitMQ"]}
-                  githubUrl="https://github.com/Matan-Shabi"
                   image="https://cdn-icons-png.flaticon.com/512/263/263115.png"
               />
             </div>
           </div>
           <div className="absolute bottom-0 left-1/4 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 right-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 right-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Leadership */}
@@ -459,13 +435,21 @@ export default function Home() {
           <div className="container mx-auto max-w-4xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Leadership & Strategy</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
-            <div className="bg-gradient-to-br from-[#232F3E] to-[#1A2433] rounded-lg p-4 md:p-8 border border-[#FF9900]/20 shadow-xl hover:shadow-[#FF9900]/10 transition-all duration-300 transform hover:scale-[1.02] animate-fade-in">
-              <h3 className="text-lg md:text-xl font-bold mb-2 text-[#FF9900]">
-                Vice Chairman | Kinneret Student Association
-              </h3>
-              <p className="text-gray-400 mb-4 text-sm md:text-base">2022-2025</p>
+            <div className="bg-gradient-to-br from-[#232F3E] to-[#1A2433] rounded-lg p-4 md:p-8 border border-[#FF9900]/20 border-l-4 border-l-[#FF9900] shadow-xl hover:shadow-[#FF9900]/10 transition-all duration-300 transform hover:scale-[1.03] animate-fade-in">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-[#FF9900]/20 p-2 rounded-full shrink-0">
+                  <Users size={20} className="text-[#FF9900]" aria-hidden="true" />
+                </div>
+                <div>
+                  <h3 className="text-lg md:text-xl font-bold text-[#FF9900]">
+                    Vice Chairman — Kinneret Student Association
+                  </h3>
+                  <p className="text-gray-400 text-sm md:text-base">2022–2025</p>
+                </div>
+              </div>
+              <div className="h-px bg-[#FF9900]/20 mb-4" />
               <ul className="list-none space-y-2 md:space-y-3 text-gray-300 text-sm md:text-base">
                 <li className="flex items-start">
                   <div className="text-[#FF9900] mr-2">•</div>
@@ -491,7 +475,7 @@ export default function Home() {
             </div>
           </div>
           <div className="absolute top-1/2 right-0 w-1/4 h-1/4 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         {/* Contact */}
@@ -503,7 +487,7 @@ export default function Home() {
           <div className="container mx-auto max-w-5xl relative z-10">
             <div className="text-center mb-8 md:mb-12">
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Get In Touch</h2>
-              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
+              <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FFCC44] mx-auto"></div>
             </div>
             <div className="max-w-lg mx-auto">
               <div className="bg-gradient-to-br from-[#232F3E]/80 to-[#1A2433]/80 p-4 md:p-8 rounded-xl border border-[#FF9900]/20 shadow-xl backdrop-blur-sm animate-fade-in">
@@ -587,7 +571,7 @@ export default function Home() {
             </div>
           </div>
           <div className="absolute bottom-0 right-1/4 w-1/3 h-1/3 bg-[#FF9900]/5 rounded-full blur-3xl"></div>
-          <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FF5757]/5 rounded-full blur-3xl"></div>
+          <div className="absolute top-1/3 left-0 w-1/4 h-1/4 bg-[#FFCC44]/5 rounded-full blur-3xl"></div>
         </section>
 
         </main>
@@ -597,7 +581,7 @@ export default function Home() {
           <div className="container mx-auto max-w-5xl">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <p className="text-gray-400 text-xs md:text-sm">
-                © {new Date().getFullYear()} Matan Shabi. All rights reserved.
+                © {new Date().getFullYear()} Matan Shabi. All rights reserved. · Updated June 2026
               </p>
               <div className="flex space-x-4 mt-4 md:mt-0">
                 <a
