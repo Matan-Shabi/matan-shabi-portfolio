@@ -33,7 +33,7 @@ export default function TechStackGridAdvanced() {
         },
         {
           name: "Next.js",
-          icon: "https://cdn.simpleicons.org/nextdotjs",
+          icon: "https://cdn.simpleicons.org/nextdotjs/FFFFFF",
           description: "React framework",
         },
       ],
@@ -49,9 +49,9 @@ export default function TechStackGridAdvanced() {
           icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg",
           description: "Programming language",
         },
-        { name: "Express", icon: "https://cdn.simpleicons.org/express", description: "Node.js web framework" },
+        { name: "Express", icon: "https://cdn.simpleicons.org/express/FFFFFF", description: "Node.js web framework" },
         { name: "Nest.js", icon: "https://cdn.simpleicons.org/nestjs", description: "Progressive Node.js framework" },
-        { name: "Flask", icon: "https://cdn.simpleicons.org/flask", description: "Python web micro-framework" },
+        { name: "Flask", icon: "https://cdn.simpleicons.org/flask/FFFFFF", description: "Python web micro-framework" },
 
       ],
     },
@@ -91,7 +91,7 @@ export default function TechStackGridAdvanced() {
         { name: "GitLab", icon: "https://cdn.simpleicons.org/gitlab", description: "DevOps platform" },
         { name: "GitHub Actions", icon: "https://cdn.simpleicons.org/githubactions", description: "Workflow automation" },
         { name: "Git", icon: "https://cdn.simpleicons.org/git", description: "Version control" },
-        { name: "GitHub", icon: "https://cdn.simpleicons.org/github", description: "Repository hosting" },
+        { name: "GitHub", icon: "https://cdn.simpleicons.org/github/FFFFFF", description: "Repository hosting" },
         { name: "Azure DevOps", icon: "https://raw.githubusercontent.com/devicons/devicon/master/icons/azuredevops/azuredevops-original.svg", description: "CI/CD & project management" },
         { name: "JFrog Artifactory", icon: "https://cdn.simpleicons.org/jfrog", description: "Binary repository manager" },
       ],
@@ -165,6 +165,7 @@ export default function TechStackGridAdvanced() {
                               alt={tech.name}
                               width={40}
                               height={40}
+                              unoptimized
                               className="max-w-full max-h-full object-contain"
                               onError={(e) => {
                                 e.currentTarget.src = "/placeholder.svg"
