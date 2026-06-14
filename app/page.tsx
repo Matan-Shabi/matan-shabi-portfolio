@@ -14,6 +14,7 @@ import CICDPipelineAnimation from "./components/cicd-pipeline-animation"
 import PipelineBackground from "./components/pipeline-background"
 import ContactDownloadButton from "./components/contact-download-button"
 import WhatsAppButton from "./components/whatsapp-button"
+import { CONTACT } from "./constants/contact"
 
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -134,7 +135,7 @@ export default function Home() {
               <div className="mb-8 md:hidden flex justify-center animate-fade-in">
                 <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-[#FF9900] shadow-xl shadow-[#FF9900]/20 animate-float">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#FF9900]/20 to-transparent z-10"></div>
-                  <Image src="/profile-photo.jpeg" alt="Matan Shabi" fill className="object-cover" priority />
+                  <Image src="/profile-photo.jpeg" alt="Matan Shabi" fill sizes="192px" className="object-cover" priority />
                 </div>
               </div>
 
@@ -171,7 +172,7 @@ export default function Home() {
                 <div className="flex flex-wrap justify-center md:justify-start gap-3 mt-3">
                   <div className="flex space-x-2">
                     <a
-                        href="https://github.com/Matan-Shabi"
+                        href={CONTACT.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 bg-gradient-to-r from-[#333] to-[#444] hover:from-[#444] hover:to-[#555] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
@@ -180,7 +181,7 @@ export default function Home() {
                       GitHub
                     </a>
                     <a
-                        href="https://linkedin.com/in/matan-shabi"
+                        href={CONTACT.linkedin}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 bg-gradient-to-r from-[#0077B5] to-[#0A66C2] hover:from-[#0A66C2] hover:to-[#0077B5] text-white px-4 py-2 md:px-6 md:py-3 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-sm md:text-base"
@@ -195,18 +196,18 @@ export default function Home() {
                   <div className="flex space-x-3">
                     <ContactDownloadButton
                         contactDetails={{
-                          name: "Matan Shabi",
-                          phoneNumber: "+972-52-8885896",
-                          email: "matan.shabi20@gmail.com",
-                          website: "https://matan-shabi.com",
-                          linkedin: "https://linkedin.com/in/matan-shabi",
-                          jobTitle: "DevOps Engineer",
+                          name: CONTACT.name,
+                          phoneNumber: CONTACT.phoneDisplay,
+                          email: CONTACT.email,
+                          website: CONTACT.website,
+                          linkedin: CONTACT.linkedin,
+                          jobTitle: CONTACT.jobTitle,
                         }}
                         variant="icon-only"
                     />
                     <WhatsAppButton
-                        phoneNumber="+972528885896"
-                        message="Hi Matan, I saw your portfolio and would like to connect!"
+                        phoneNumber={CONTACT.phone}
+                        message={CONTACT.whatsappMessage}
                     />
                   </div>
                 </div>
@@ -226,7 +227,7 @@ export default function Home() {
               <div className="hidden md:block md:w-2/5 flex justify-center animate-fade-in-delayed">
                 <div className="relative w-56 h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-[#FF9900] shadow-xl shadow-[#FF9900]/20 animate-float">
                   <div className="absolute inset-0 bg-gradient-to-br from-[#FF9900]/20 to-transparent z-10"></div>
-                  <Image src="/profile-photo.jpeg" alt="Matan Shabi" fill className="object-cover" priority />
+                  <Image src="/profile-photo.jpeg" alt="Matan Shabi" fill sizes="(max-width: 1023px) 224px, 256px" className="object-cover" priority />
                 </div>
               </div>
             </div>
@@ -276,16 +277,16 @@ export default function Home() {
                       <div className="bg-[#FF9900]/20 p-2 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
                         <Mail size={16} className="text-[#FF9900]" />
                       </div>
-                      <a href="mailto:matan.shabi20@gmail.com" className="hover:underline text-sm md:text-base">
-                        matan.shabi20@gmail.com
+                      <a href={`mailto:${CONTACT.email}`} className="hover:underline text-sm md:text-base">
+                        {CONTACT.email}
                       </a>
                     </li>
                     <li className="flex items-center gap-3 group">
                       <div className="bg-[#FF9900]/20 p-2 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
                         <Phone size={16} className="text-[#FF9900]" />
                       </div>
-                      <a href="tel:+972528885896" className="hover:underline text-sm md:text-base">
-                        +972-52-8885896
+                      <a href={`tel:${CONTACT.phone}`} className="hover:underline text-sm md:text-base">
+                        {CONTACT.phoneDisplay}
                       </a>
                     </li>
                     <li className="flex items-center gap-3 group">
@@ -293,12 +294,12 @@ export default function Home() {
                         <Linkedin size={16} className="text-[#FF9900]" />
                       </div>
                       <a
-                          href="https://linkedin.com/in/matan-shabi"
+                          href={CONTACT.linkedin}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:text-[#FF9900] transition-colors text-sm md:text-base"
                       >
-                        linkedin.com/in/matan-shabi
+                        {CONTACT.linkedinDisplay}
                       </a>
                     </li>
                     <li className="flex items-center gap-3 group">
@@ -306,12 +307,12 @@ export default function Home() {
                         <Github size={16} className="text-[#FF9900]" />
                       </div>
                       <a
-                          href="https://github.com/Matan-Shabi"
+                          href={CONTACT.github}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="hover:text-[#FF9900] transition-colors text-sm md:text-base"
                       >
-                        github.com/Matan-Shabi
+                        {CONTACT.githubDisplay}
                       </a>
                     </li>
                   </ul>
@@ -504,12 +505,12 @@ export default function Home() {
               <h2 className="text-2xl md:text-3xl font-bold mb-2 inline-block text-gradient">Get In Touch</h2>
               <div className="h-1 w-20 bg-gradient-to-r from-[#FF9900] to-[#FF5757] mx-auto"></div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div className="max-w-lg mx-auto">
               <div className="bg-gradient-to-br from-[#232F3E]/80 to-[#1A2433]/80 p-4 md:p-8 rounded-xl border border-[#FF9900]/20 shadow-xl backdrop-blur-sm animate-fade-in">
                 <h3 className="text-lg md:text-xl font-semibold mb-4 md:mb-6 text-[#FF9900]">Contact Information</h3>
                 <div className="space-y-4 md:space-y-6">
                   <a
-                      href="mailto:matan.shabi20@gmail.com"
+                      href={`mailto:${CONTACT.email}`}
                       className="flex items-center gap-3 md:gap-4 text-gray-300 hover:text-[#FF9900] group transition-colors"
                   >
                     <div className="bg-[#FF9900]/20 p-2 md:p-3 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
@@ -517,23 +518,23 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-medium text-sm md:text-base">Email</p>
-                      <p className="text-xs md:text-sm">matan.shabi20@gmail.com</p>
+                      <p className="text-xs md:text-sm">{CONTACT.email}</p>
                     </div>
                   </a>
                   <a
-                      href="tel:+97252-8885896"
+                      href={`tel:${CONTACT.phone}`}
                       className="flex items-center gap-3 md:gap-4 text-gray-300 hover:text-[#FF9900] group transition-colors"
                   >
                     <div className="bg-[#FF9900]/20 p-2 md:p-3 rounded-full group-hover:bg-[#FF9900]/40 transition-colors">
-                      <Phone size={18} className="md:w-6 md:h-6 text-[#FF99 কিন্তon]" />
+                      <Phone size={18} className="md:w-6 md:h-6 text-[#FF9900]" />
                     </div>
                     <div>
                       <p className="font-medium text-sm md:text-base">Phone</p>
-                      <p className="text-xs md:text-sm">+972-52-8885896</p>
+                      <p className="text-xs md:text-sm">{CONTACT.phoneDisplay}</p>
                     </div>
                   </a>
                   <a
-                      href="https://linkedin.com/in/matan-shabi"
+                      href={CONTACT.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 md:gap-4 text-gray-300 hover:text-[#FF9900] group transition-colors"
@@ -543,11 +544,11 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-medium text-sm md:text-base">LinkedIn</p>
-                      <p className="text-xs md:text-sm">linkedin.com/in/matan-shabi</p>
+                      <p className="text-xs md:text-sm">{CONTACT.linkedinDisplay}</p>
                     </div>
                   </a>
                   <a
-                      href="https://github.com/Matan-Shabi"
+                      href={CONTACT.github}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="flex items-center gap-3 md:gap-4 text-gray-300 hover:text-[#FF9900] group transition-colors"
@@ -557,28 +558,28 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="font-medium text-sm md:text-base">GitHub</p>
-                      <p className="text-xs md:text-sm">github.com/Matan-Shabi</p>
+                      <p className="text-xs md:text-sm">{CONTACT.githubDisplay}</p>
                     </div>
                   </a>
                 </div>
                 <div className="mt-6 md:mt-8 flex justify-center">
                   <QRCode />
                 </div>
-                <div className="flex justify-center md:justify-start mt-3">
+                <div className="flex justify-center mt-3">
                   <div className="flex space-x-3">
                     <ContactDownloadButton
                         contactDetails={{
-                          name: "Matan Shabi",
-                          phoneNumber: "+972-52-8885896",
-                          email: "matan.shabi20@gmail.com",
-                          website: "https://matan-shabi.com",
-                          linkedin: "https://linkedin.com/in/matan-shabi",
+                          name: CONTACT.name,
+                          phoneNumber: CONTACT.phoneDisplay,
+                          email: CONTACT.email,
+                          website: CONTACT.website,
+                          linkedin: CONTACT.linkedin,
                         }}
                         variant="icon-only"
                     />
                     <WhatsAppButton
-                        phoneNumber="+972528885896"
-                        message="Hi Matan, I saw your portfolio and would like to connect!"
+                        phoneNumber={CONTACT.phone}
+                        message={CONTACT.whatsappMessage}
                     />
                   </div>
                 </div>
@@ -600,7 +601,7 @@ export default function Home() {
               </p>
               <div className="flex space-x-4 mt-4 md:mt-0">
                 <a
-                    href="https://linkedin.com/in/matan-shabi"
+                    href={CONTACT.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Matan Shabi on LinkedIn"
@@ -609,7 +610,7 @@ export default function Home() {
                   <Linkedin size={16} className="md:w-5 md:h-5" aria-hidden="true" />
                 </a>
                 <a
-                    href="https://github.com/Matan-Shabi"
+                    href={CONTACT.github}
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Matan Shabi on GitHub"
@@ -618,7 +619,7 @@ export default function Home() {
                   <Github size={16} className="md:w-5 md:h-5" aria-hidden="true" />
                 </a>
                 <a
-                    href="mailto:matan.shabi20@gmail.com"
+                    href={`mailto:${CONTACT.email}`}
                     aria-label="Send email to Matan Shabi"
                     className="bg-[#232F3E] p-2 rounded-full text-gray-400 hover:text-[#FF9900] hover:bg-[#2d3b4d] transition-colors"
                 >

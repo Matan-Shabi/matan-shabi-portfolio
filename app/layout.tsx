@@ -81,10 +81,41 @@ const ld = {
       jobTitle: "DevOps & Cloud-Security Engineer",
       url: "https://matan-shabi.com",
       image: "https://matan-shabi.com/profile-photo.jpeg",
+      email: "matan.shabi20@gmail.com",
+      telephone: "+972528885896",
       sameAs: [
         "https://www.linkedin.com/in/matan-shabi/",
         "https://github.com/Matan-Shabi",
       ],
+      knowsAbout: [
+        "DevOps Engineering",
+        "Cloud Security",
+        "Amazon Web Services",
+        "Kubernetes",
+        "Docker",
+        "Terraform",
+        "CI/CD Pipelines",
+        "Jenkins",
+        "GitHub Actions",
+        "GitLab CI",
+        "Azure DevOps",
+        "Python",
+        "Bash",
+        "DevSecOps",
+        "Platform Engineering",
+        "Infrastructure as Code",
+        "AWS CDK",
+        "Ansible",
+        "Datadog",
+        "Grafana",
+        "JFrog Artifactory",
+      ],
+      hasOccupation: {
+        "@type": "Occupation",
+        name: "DevOps Engineer",
+        occupationalCategory: "15-1244.00",
+        skills: "AWS, Kubernetes, Terraform, CI/CD, Docker, Python, DevSecOps, Platform Engineering, Infrastructure as Code",
+      },
     },
     {
       "@type": "WebSite",
@@ -95,12 +126,32 @@ const ld = {
         "Portfolio of Matan Shabi, DevOps & Cloud-Security engineer specializing in AWS, Kubernetes, and CI/CD.",
       publisher: { "@id": "https://matan-shabi.com/#person" },
     },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://matan-shabi.com/#profilepage",
+      url: "https://matan-shabi.com",
+      name: "Matan Shabi – DevOps & Cloud Security Engineer Portfolio",
+      description:
+        "Personal portfolio and resume of Matan Shabi, a DevOps & Cloud-Security engineer available for hire. Specialises in AWS, Kubernetes, CI/CD, Terraform, and DevSecOps.",
+      mainEntity: { "@id": "https://matan-shabi.com/#person" },
+      dateModified: "2026-06-14",
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://matan-shabi.com/#webpage",
+      url: "https://matan-shabi.com",
+      isPartOf: { "@id": "https://matan-shabi.com/#website" },
+      speakable: {
+        "@type": "SpeakableSpecification",
+        cssSelector: ["h1", "h2"],
+      },
+    },
   ],
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-scroll-behavior="smooth">
+    <html lang="en" className="scroll-smooth">
       <head>
         <script
           type="application/ld+json"

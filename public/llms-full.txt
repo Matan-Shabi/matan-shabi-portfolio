@@ -1,0 +1,278 @@
+# Matan Shabi – Full CV & Portfolio
+
+> This file contains the complete curriculum vitae and portfolio of Matan Shabi (מתן שאבי), a DevOps & Cloud-Security engineer based in Israel. It is provided for AI tools and agents that benefit from larger context. For a structured index, see /llms.txt. For an HTML resume, see /cv.
+
+---
+
+## Identity
+
+Name: Matan Shabi (Hebrew: מתן שאבי)
+Title: DevOps & Cloud-Security Engineer
+Location: Israel
+Available for: DevOps, DevSecOps, Platform Engineering roles
+Email: matan.shabi20@gmail.com
+Phone: +972-52-8885896
+LinkedIn: https://www.linkedin.com/in/matan-shabi/
+GitHub: https://github.com/Matan-Shabi
+Website: https://matan-shabi.com
+CV (PDF): https://matan-shabi.com/Matan-Shabi-CV.pdf
+
+---
+
+## Professional Summary
+
+Matan Shabi is a detail-oriented DevOps & Cloud-Security engineer with a strong foundation in cloud technologies (AWS), CI/CD pipelines (Jenkins, GitHub Actions, GitLab CI, Azure DevOps), and container orchestration (Docker, Kubernetes). Skilled in Python, Bash, Java, and infrastructure automation with Terraform and AWS CDK. Experienced in DevSecOps practices, penetration testing, RBAC policy enforcement, and platform engineering. Holds a B.Sc. in Software Engineering from Kinneret Academic College (2020–2025). Former vice chairman of a large student association, demonstrating leadership, budget management, and team-building skills. Seeking a DevOps, DevSecOps, or Platform Engineering role to build robust, scalable, and secure infrastructure.
+
+---
+
+## Professional Experience
+
+### DevOps Engineer — MSD Animal Health Technology Labs (Merck)
+Period: 2025 – Present
+
+MSD Animal Health Technology Labs is part of Merck & Co., a global pharmaceutical and animal health company. Matan works on the DevOps and cloud infrastructure team.
+
+Responsibilities and achievements:
+- Planned and implemented Terraform modules migration, reducing cloud resource costs by 15% in the production environment.
+- Led a team in an internal hackathon, winning 5th place. Implemented hackathon outcomes as internal tooling to migrate the organisation from Azure DevOps (AZDO) to GitHub.
+- Maintained and managed AZDO legacy CI/CD pipelines in the production environment.
+- Developed an automated policy enforcement system on the organisational GitHub, ensuring compliance and security standards across all repositories.
+- Authored Architecture Decision Records (ADRs), onboarding guides, and deployment playbooks to improve team knowledge sharing and operational efficiency.
+
+Technologies: Terraform, AWS, GitHub, Azure DevOps, Python, CI/CD
+
+---
+
+### Software Engineer — Accadia Software Technologies
+Period: 2024 – 2025
+
+Accadia is a software company focused on enterprise management systems.
+
+Responsibilities and achievements:
+- Architected and launched a scalable, modular admin panel frontend using Next.js, TypeScript, and Feature-Sliced Design (FSD), delivering reusable UI components and dynamic role-based access control (RBAC).
+- Built and optimised a backend REST API using Express.js, Prisma, and SQL Server, modelling fine-grained permissions and tuning database indices for fast, secure data access.
+- Deployed the full-stack application on Windows Server 2022, configuring IIS for hosting and PM2 for process management, enabling zero-downtime restarts, auto-recovery, and centralised log collection.
+
+Technologies: Next.js, TypeScript, Express.js, Prisma, SQL Server, IIS, PM2, Windows Server 2022, Feature-Sliced Design, RBAC
+
+---
+
+### Software Engineer — Kinneret Innovation Center
+Period: 2021 – 2023
+
+The Kinneret Innovation Center is a technology and entrepreneurship hub affiliated with Kinneret Academic College.
+
+Responsibilities and achievements:
+- Led software development projects using PHP and Python.
+- Created a real-time performance dashboard using Python, providing actionable insights for stakeholders.
+- Managed client communication and provided regular project updates.
+- Collaborated on UI development with design teams.
+- Optimised web applications for organic Google search ranking (SEO).
+
+Technologies: PHP, Python, JavaScript, MySQL, SEO
+
+---
+
+### IT Technician — Poria Hospital
+Period: 2019 – 2020
+
+Poria Hospital (Baruch Padeh Medical Center) is a major hospital in the Lower Galilee region of Israel.
+
+Responsibilities and achievements:
+- Managed computer and network systems across hospital departments.
+- Resolved hardware and software issues for clinical and administrative staff.
+- Provided technical support to end-users in a high-availability medical environment.
+
+Technologies: Windows, Networking, Hardware Troubleshooting
+
+---
+
+### Team Leader & Electronics Instructor — Israeli Air Force
+Period: 2017 – 2019
+
+Mandatory military service in the Israeli Air Force, serving as a team leader and electronics instructor.
+
+Responsibilities:
+- Led a team, managing recruitment, training, and day-to-day operations.
+- Instructed personnel in electronics systems and maintenance.
+- Developed teaching materials and training programmes.
+
+---
+
+## Education
+
+### B.Sc. in Software Engineering
+Institution: Kinneret Academic College on the Sea of Galilee
+Period: 2020 – 2025
+Degree: Bachelor of Science in Software Engineering
+
+---
+
+### DevOps Engineer Certification
+Institution: DevOps Experts
+Location: Ramat Gan, Israel
+Period: 2024
+
+Curriculum covered:
+- Python scripting and API integration
+- Jenkins CI/CD pipeline design and implementation
+- Git version control and branching strategies
+- Linux system administration
+- AWS cloud resource provisioning (EC2, S3, VPC, IAM)
+- Terraform for infrastructure as code
+- Docker containerisation
+- Kubernetes orchestration
+- Ansible for infrastructure automation
+
+Capstone projects: Python RESTful API; full CI/CD pipeline; containerised production-ready deployment.
+GitHub: https://github.com/Matan-Shabi/WorldOfGame
+
+---
+
+### Practical Engineer in Electronics
+Institution: Kinneret Academic College
+Period: 2015 – 2017
+
+---
+
+### CCNA – Cisco Networking
+Cisco Certified Network Associate certification covering networking fundamentals, routing, switching, and security.
+
+---
+
+## Technical Skills
+
+### Cloud Platforms
+- AWS: EC2, S3, Lambda, EKS, IAM, CloudFront, Amplify, CDK, VPC, RDS, Route 53
+
+### Containers & Orchestration
+- Docker (images, Compose, registries)
+- Kubernetes (EKS, deployments, services, ingress, RBAC)
+
+### CI/CD
+- Jenkins (pipelines, shared libraries, agents)
+- GitHub Actions (workflows, reusable workflows, secrets)
+- GitLab CI (pipelines, runners)
+- Azure DevOps (AZDO pipelines, boards, repos)
+
+### Infrastructure as Code
+- Terraform (modules, state management, remote backends)
+- AWS CDK (TypeScript constructs)
+- Ansible (playbooks, roles, inventory)
+
+### Security & DevSecOps
+- DevSecOps practices (shifting security left in CI/CD)
+- Penetration testing fundamentals
+- IAM policy design and enforcement
+- RBAC (role-based access control) implementation
+- Automated policy enforcement on GitHub
+
+### Programming Languages
+- Python (scripting, automation, REST APIs, Flask)
+- Bash / Shell scripting
+- PHP
+- Java
+- TypeScript / JavaScript
+
+### Monitoring & Observability
+- Datadog (metrics, logs, traces, monitors, dashboards)
+- Grafana (dashboards, alerting)
+
+### Web & Application Deployment
+- IIS (Internet Information Services) on Windows Server 2022
+- PM2 (process management, clustering, log management)
+- Next.js (App Router, server components, API routes)
+- Express.js (REST APIs, middleware, routing)
+
+### Databases
+- SQL Server (schema design, Prisma ORM, index optimisation)
+- MongoDB (collections, aggregations)
+
+### Artifact & Package Management
+- JFrog Artifactory
+
+### Other Tools
+- Git (branching, rebasing, pull requests, code review)
+- RabbitMQ (message queues, exchanges)
+- Selenium (automated browser testing)
+- Feature-Sliced Design (FSD) architectural methodology
+
+---
+
+## Projects
+
+### WorldOfGame
+Repository: https://github.com/Matan-Shabi/WorldOfGame
+Stack: Python, Docker, Jenkins, Selenium
+
+A Python-based mini-games platform that demonstrates a complete, production-grade DevOps workflow. Features:
+- CI/CD pipeline built with Jenkins: lint → test → build → push → deploy
+- Dockerised application with multi-stage builds
+- Selenium-based end-to-end tests running in the pipeline
+- Automated deployment to a containerised environment
+
+---
+
+### Essentia User Management System
+Stack: Next.js, TypeScript, Express.js, Prisma, SQL Server, IIS, PM2
+
+A modular enterprise admin panel with:
+- Dynamic role-based access control (RBAC) with fine-grained permissions
+- Feature-Sliced Design (FSD) architecture for maintainability
+- Full-stack deployment on Windows Server 2022
+
+---
+
+### Mulligan Parking System
+Stack: Java, MongoDB, RabbitMQ
+
+A fully distributed, fault-tolerant parking management system:
+- Message-driven architecture with RabbitMQ for decoupled service communication
+- AI-powered parking recommendations
+- MongoDB for flexible, schema-less data storage
+- Designed for high availability and horizontal scalability
+
+---
+
+## Leadership & Extracurricular
+
+### Vice Chairman — Kinneret Student Association
+Period: 2022 – 2025
+
+The Kinneret Student Association represents all students at Kinneret Academic College.
+
+Achievements:
+- Led a team of 30 members, managing recruitment, training, and professional development.
+- Oversaw a 1,000,000 NIS annual budget and developed long-term economic strategies.
+- Organised large-scale cultural and social events for the student body.
+- Developed a centralised Moodle-based learning management system to enhance accessibility of academic resources.
+- Managed a major campus job fair, handling logistics, budget allocation, and marketing.
+
+---
+
+## Languages
+
+- Hebrew: Native speaker
+- English: Proficient (reading, writing, technical communication)
+
+---
+
+## Contact & Links
+
+- Email: matan.shabi20@gmail.com
+- Phone: +972-52-8885896
+- LinkedIn: https://www.linkedin.com/in/matan-shabi/
+- GitHub: https://github.com/Matan-Shabi
+- Portfolio: https://matan-shabi.com
+- CV (PDF): https://matan-shabi.com/Matan-Shabi-CV.pdf
+- CV (HTML): https://matan-shabi.com/cv
+
+---
+
+## Recruiter Notes
+
+- Matan is actively looking for new opportunities as of 2025–2026.
+- Open to roles in Israel (on-site, hybrid, or remote) and international remote positions.
+- Target roles: DevOps Engineer, DevSecOps Engineer, Cloud Engineer, Platform Engineer, Site Reliability Engineer (SRE).
+- Core differentiators: hands-on production Terraform cost optimisation, GitHub policy automation, full-stack deployment experience (not just infrastructure), and leadership background.
+- References and additional details available on request via email.

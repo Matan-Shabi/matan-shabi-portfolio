@@ -1,0 +1,8 @@
+{
+  "name": "Matan Shabi Portfolio",
+  "description": "Personal portfolio site for Matan Shabi, DevOps & Cloud-Security engineer. No agent API. See /llms.txt for site index and /llms-full.txt for full CV content.",
+  "url": "https://matan-shabi.com",
+  "version": "1.0.0",
+  "capabilities": {},
+  "skills": []
+}

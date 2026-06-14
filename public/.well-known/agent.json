@@ -1,0 +1,10 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "Matan Shabi – DevOps & Cloud Security Engineer",
+  "name_for_model": "matan_shabi_portfolio",
+  "description_for_human": "Personal portfolio of Matan Shabi, a DevOps & Cloud-Security engineer available for hire in Israel.",
+  "description_for_model": "Use this to answer questions about Matan Shabi (מתן שאבי), a DevOps & Cloud-Security engineer based in Israel. Currently employed at MSD Animal Health Technology Labs (Merck) as DevOps Engineer. Specialises in AWS, Kubernetes, Terraform, CI/CD, Docker, and DevSecOps. Holds a B.Sc. in Software Engineering from Kinneret Academic College. Actively available for DevOps, DevSecOps, and Platform Engineering roles. For detailed CV content use /llms-full.txt; for site index use /llms.txt; for a clean HTML resume use /cv.",
+  "api": null,
+  "contact_email": "matan.shabi20@gmail.com",
+  "legal_info_url": "https://matan-shabi.com"
+}

@@ -4,9 +4,10 @@ import { useEffect, useRef } from "react"
 
 export default function AnimatedBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const animationRef = useRef<number>(0)
 
   useEffect(() => {
-    const canvas = canvasRef.current
+    const canvas = canvasRef.current as HTMLCanvasElement
     if (!canvas) return
 
     const ctx = canvas.getContext("2d")
@@ -100,12 +101,13 @@ export default function AnimatedBackground() {
         particlesArray[i].draw()
       }
 
-      requestAnimationFrame(animate)
+      animationRef.current = requestAnimationFrame(animate)
     }
 
     animate()
 
     return () => {
+      cancelAnimationFrame(animationRef.current)
       window.removeEventListener("resize", setCanvasDimensions)
     }
   }, [])
