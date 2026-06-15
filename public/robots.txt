@@ -1,6 +1,7 @@
 User-agent: *
 Content-Signal: search=yes, ai-input=yes, ai-train=yes
 Allow: /
+Disallow: /_next/image
 
 # Search engines
 User-agent: Googlebot
